@@ -15,7 +15,7 @@ class VirtualObject: SCNNode {
     var id: String
     var anchor: ARAnchor
     
-    var virtualButtons = [VirtualButton]()
+    var virtualButtonsContainer: VirtualButtonsContainer?
     var animations = [String]()
     
     
@@ -70,6 +70,8 @@ class VirtualObject: SCNNode {
             
         }
         
+        var virtualButtons = [VirtualButton]()
+        
         for key in animations {
             
             let button = VirtualButton()
@@ -81,7 +83,8 @@ class VirtualObject: SCNNode {
             virtualButtons.append(button)
         }
         
-        virtualButtons.first?.anchor = ARAnchor(transform: anchor.transform.translatedUp(-0.2))
+        let containerAnchor = ARAnchor(transform: anchor.transform.translatedUp(-0.2))
+        virtualButtonsContainer = VirtualButtonsContainer(buttons: virtualButtons, anchor: containerAnchor)
         
         
     }

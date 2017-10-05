@@ -204,10 +204,7 @@ extension ARQRViewController: ARSessionDelegate {
         self.virtualObjectsManager.loadVirtualObjectFromId(newQRCode.objectId, withAnchor: anchor) { virtualObject in
             
             self.sceneView.session.add(anchor: anchor)
-            
-            for button in virtualObject.virtualButtons {
-                self.sceneView.session.add(anchor: button.anchor!)
-            }
+            self.sceneView.session.add(anchor: virtualObject.virtualButtonsContainer!.anchor)
             
             self.processing = false
         }

@@ -29,7 +29,7 @@ class VirtualObjectsManager {
         if let virtualObject = virtualObjects.first(where: { $0.anchor == anchor }) {
             return virtualObject
         } else {
-            return virtualObjects.flatMap{$0.virtualButtons}
+            return virtualObjects.map{$0.virtualButtonsContainer!}
                 .first{$0.anchor == anchor}
         }
     }

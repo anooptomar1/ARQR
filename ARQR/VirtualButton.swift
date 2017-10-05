@@ -13,8 +13,6 @@ import ARKit
 
 class VirtualButton: SCNNode {
     
-    var anchor: ARAnchor?
-    
     var title: String?
     var highlighted = false
     
@@ -29,16 +27,11 @@ class VirtualButton: SCNNode {
         let spriteKitScene = SKScene(size: CGSize(width: skScenewidth, height: skSceneHeight))
         spriteKitScene.backgroundColor = UIColor.cyan
         
-        let imagePlane = SCNPlane(width: 0.2, height: 0.1)
+        let imagePlane = SCNPlane(width: 0.08, height: 0.08)
         imagePlane.firstMaterial?.isDoubleSided = true
         imagePlane.firstMaterial?.diffuse.contents = spriteKitScene
         
         self.geometry = imagePlane
-        
-        let billboardConstraint = SCNBillboardConstraint()
-        billboardConstraint.freeAxes = SCNBillboardAxis.Y
-        self.constraints = [billboardConstraint]
-        
         
     }
     
