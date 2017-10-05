@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ARQR/ARQRViewController.swift"
+            timestampString = "528881540.930095"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "session(_:didUpdate:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Array&lt;ARQR.QRCode&gt;) -&gt; () in ARQR.ARQRViewController.session(__ObjC.ARSession, didUpdate: __ObjC.ARFrame) -&gt; ()"
+                  moduleName = "ARQR"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/walter/Documents/Dev/ARQR/ARQR/ARQRViewController.swift"
+                  timestampString = "528726632.844715"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "125"
+                  endingLineNumber = "125"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (ARQR.QRCode) -&gt; Swift.Bool in closure #1 (Swift.Array&lt;ARQR.QRCode&gt;) -&gt; () in ARQR.ARQRViewController.session(__ObjC.ARSession, didUpdate: __ObjC.ARFrame) -&gt; ()"
+                  moduleName = "ARQR"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/walter/Documents/Dev/ARQR/ARQR/ARQRViewController.swift"
+                  timestampString = "528726632.846276"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "125"
+                  endingLineNumber = "125"
+                  offsetFromSymbolStart = "84">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
