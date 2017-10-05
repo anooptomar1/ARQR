@@ -15,6 +15,7 @@ class ARQRViewController: UIViewController {
     // MARK: - Properties
     
     var sceneView: ARSCNView!
+    var resetButton: UIButton!
     
     var virtualObjectsManager: VirtualObjectsManager!
     
@@ -33,6 +34,7 @@ extension ARQRViewController {
         virtualObjectsManager = VirtualObjectsManager()
         
         setupSceneView()
+        setupResetButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,7 +54,6 @@ extension ARQRViewController {
         sceneView = ARSCNView()
         sceneView.delegate = self
         sceneView.session.delegate = self
-        sceneView.showsStatistics = true
         sceneView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(sceneView)
         
@@ -62,6 +63,25 @@ extension ARQRViewController {
             sceneView.rightAnchor.constraint(equalTo: view.rightAnchor),
             sceneView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             ])
+    }
+    
+    private func setupResetButton() {
+        
+        resetButton = UIButton()
+        resetButton.setTitle("Reset", for: .normal)
+        resetButton.addTarget(self, action:#selector(resetButtonPressed), for: .touchUpInside)
+        resetButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(resetButton)
+        
+        NSLayoutConstraint.activate([
+            resetButton.leftAnchor.constraint(equalTo: view.leftAnchor),
+            resetButton.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+//            resetButton.heightAnchor.constraint(equalToConstant: 10.0),
+//            resetButton.widthAnchor.constraint(equalToConstant: 30)
+            ])
+        
+        
+        
     }
     
     private func startSession(reset: Bool = false) {
@@ -80,6 +100,12 @@ extension ARQRViewController {
     private func pauseSession() {
         sceneView.session.pause()
     }
+    
+    @objc func resetButtonPressed(sender: UIButton) {
+        
+        startSession(reset: true)
+        
+    }
 }
 
 // MARK: - ARSCNViewDelegate
@@ -89,8 +115,7 @@ extension ARQRViewController: ARSCNViewDelegate {
     // Override to create and configure nodes for anchors added to the view's session.
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
         
-        print(anchor.transform.xyz())
-        return virtualObjectsManager.sceneNodeFromAnchor(anchor)
+        return virtualObjectsManager.virtualObjectFromAnchor(anchor)
     }
     
     func session(_ session: ARSession, didFailWithError error: Error) {
@@ -140,8 +165,8 @@ extension ARQRViewController: ARSessionDelegate {
             return
         }
         
-        self.virtualObjectsManager.loadSceneNodeFromId(newQRCode.objectId) {
-            self.virtualObjectsManager.add(anchor, withId: newQRCode.objectId)
+        self.virtualObjectsManager.loadVirtualObjectFromId(newQRCode.objectId) {
+            self.virtualObjectsManager.attach(anchor, toVirtualObjectWithId: newQRCode.objectId)
             self.sceneView.session.add(anchor: anchor)
             self.processing = false
         }

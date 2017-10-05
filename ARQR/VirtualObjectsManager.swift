@@ -13,39 +13,35 @@ class VirtualObjectsManager {
     
     private let basePath = "art.scnassets"
     
-    // Maps IDs to ARAnchors and Scene nodes
-    private var arAnchors = [String: ARAnchor]()
-    private var sceneNodes = [String: SCNNode]()
+    private var virtualObjects = [VirtualObject]()
     
     func clearObjects() {
-        arAnchors.removeAll()
-        sceneNodes.removeAll()
+        virtualObjects.removeAll()
     }
     
     func hasObjectwithId(_ id: String) -> Bool {
-        return arAnchors.keys.contains(id)
+        return virtualObjects.map{ $0.id }.contains(id)
     }
     
-    func add(_ anchor: ARAnchor, withId id: String) {
-        arAnchors[id] = anchor
-    }
-    
-    func sceneNodeFromAnchor(_ anchor: ARAnchor) -> SCNNode? {
+    func attach(_ anchor: ARAnchor, toVirtualObjectWithId id: String) {
         
-        let id = arAnchors.keys.first{ arAnchors[$0] == anchor }
-        
-        if let id = id {
-            return sceneNodes[id]
+        if let virtualObject = virtualObjects.first(where: { $0.id == id }) {
+            virtualObject.anchor = anchor
         } else {
-            return nil
+            // Object not found
         }
     }
     
-    func loadSceneNodeFromId(_ id: String, completionHandler: @escaping () -> Void) {
+    func virtualObjectFromAnchor(_ anchor: ARAnchor) -> VirtualObject? {
+        
+        return virtualObjects.first{ $0.anchor == anchor }
+    }
+    
+    func loadVirtualObjectFromId(_ id: String, completionHandler: @escaping () -> Void) {
         print("Loading ID: \(id)")
         
         
-        self.loadSceneFileWithId(id)
+        self.loadVirtualObjectWithId(id)
         
         DispatchQueue.main.async {
             completionHandler()
@@ -66,46 +62,11 @@ class VirtualObjectsManager {
 //        }
     }
     
-    private func loadSceneFileWithId(_ id: String) {
+    private func loadVirtualObjectWithId(_ id: String) {
         
-//        let fileManager = FileManager()
-//
-//        let baseUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(id)")
-//        var fileUrl: URL? = nil
-//
-//        let enumerator = fileManager.enumerator(at: baseUrl, includingPropertiesForKeys: nil)
-//
-//        while let element = enumerator?.nextObject() as? URL {
-//            if (element.pathExtension == "scn" || element.pathExtension == "dae") {
-//                fileUrl = element
-//                break
-//            }
-//        }
+        let virtualObject = VirtualObject(id: id)
+        virtualObject.load()
         
-        let fileUrl = Bundle.main.urls(forResourcesWithExtension: "dae", subdirectory: "\(basePath)/Battery")?.first
-        
-        
-        guard let url = fileUrl else {
-            // no scene file
-            
-            return
-        }
-        
-        let source = SCNSceneSource(url: url, options: nil)
-        let scene = source?.scene(options: nil)
-        
-        let wrapperNode = SCNNode()
-        
-        for child in scene!.rootNode.childNodes {
-            child.geometry?.firstMaterial?.lightingModel = .physicallyBased
-            child.movabilityHint = .movable
-            //            child.scale = SCNVector3(x: 0.2, y: 0.2, z: 0.2)
-            
-            wrapperNode.addChildNode(child)
-        }
-        
-        self.sceneNodes[id] = wrapperNode
-        
+        virtualObjects.append(virtualObject)
     }
-    
 }
