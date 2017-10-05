@@ -23,28 +23,25 @@ class VirtualObjectsManager {
         return virtualObjects.map{ $0.id }.contains(id)
     }
     
-    func attach(_ anchor: ARAnchor, toVirtualObjectWithId id: String) {
+    func virtualObjectFromAnchor(_ anchor: ARAnchor) -> SCNNode? {
         
-        if let virtualObject = virtualObjects.first(where: { $0.id == id }) {
-            virtualObject.anchor = anchor
+        
+        if let virtualObject = virtualObjects.first(where: { $0.anchor == anchor }) {
+            return virtualObject
         } else {
-            // Object not found
+            return virtualObjects.flatMap{$0.virtualButtons}
+                .first{$0.anchor == anchor}
         }
     }
     
-    func virtualObjectFromAnchor(_ anchor: ARAnchor) -> VirtualObject? {
-        
-        return virtualObjects.first{ $0.anchor == anchor }
-    }
-    
-    func loadVirtualObjectFromId(_ id: String, completionHandler: @escaping () -> Void) {
+    func loadVirtualObjectFromId(_ id: String,withAnchor anchor: ARAnchor, completionHandler: @escaping (VirtualObject) -> Void) {
         print("Loading ID: \(id)")
         
         
-        self.loadVirtualObjectWithId(id)
+        let virtualObject = self.loadVirtualObjectWithId(id, anchor: anchor)
         
         DispatchQueue.main.async {
-            completionHandler()
+            completionHandler(virtualObject)
         }
         
 //        NetworkManager.shared.getObjectInfoWithId(id) { objectInfo in
@@ -62,11 +59,12 @@ class VirtualObjectsManager {
 //        }
     }
     
-    private func loadVirtualObjectWithId(_ id: String) {
+    private func loadVirtualObjectWithId(_ id: String, anchor: ARAnchor) -> VirtualObject {
         
-        let virtualObject = VirtualObject(id: id)
+        let virtualObject = VirtualObject(id: id, anchor: anchor)
         virtualObject.load()
         
         virtualObjects.append(virtualObject)
+        return virtualObject
     }
 }

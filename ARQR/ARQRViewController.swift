@@ -35,6 +35,10 @@ extension ARQRViewController {
         
         setupSceneView()
         setupResetButton()
+        
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        sceneView.addGestureRecognizer(tapGesture)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -106,6 +110,38 @@ extension ARQRViewController {
         startSession(reset: true)
         
     }
+    
+    @objc
+    func handleTap(gestureRecognize: UITapGestureRecognizer) {
+        
+        let position = gestureRecognize.location(ofTouch: 0, in: sceneView)
+        
+        if let button = virtualButton(at: position) {
+            
+        }
+    }
+    
+    private func virtualButton(at point: CGPoint) -> VirtualButton?  {
+        let hitTestOptions: [SCNHitTestOption: Any] = [.boundingBoxOnly: true]
+        let hitTestResults: [SCNHitTestResult] = sceneView.hitTest(point, options: hitTestOptions)
+        
+        return hitTestResults.lazy.flatMap { result in
+            self.isNodePartOfVirtualbutton(result.node)
+            }.first
+    }
+    
+    func isNodePartOfVirtualbutton(_ node: SCNNode) -> VirtualButton? {
+        if let virtualButton = node as? VirtualButton {
+            return virtualButton
+        }
+        
+        if node.parent != nil {
+            return isNodePartOfVirtualbutton(node.parent!)
+        }
+        
+        return nil
+    }
+
 }
 
 // MARK: - ARSCNViewDelegate
@@ -165,9 +201,14 @@ extension ARQRViewController: ARSessionDelegate {
             return
         }
         
-        self.virtualObjectsManager.loadVirtualObjectFromId(newQRCode.objectId) {
-            self.virtualObjectsManager.attach(anchor, toVirtualObjectWithId: newQRCode.objectId)
+        self.virtualObjectsManager.loadVirtualObjectFromId(newQRCode.objectId, withAnchor: anchor) { virtualObject in
+            
             self.sceneView.session.add(anchor: anchor)
+            
+            for button in virtualObject.virtualButtons {
+                self.sceneView.session.add(anchor: button.anchor!)
+            }
+            
             self.processing = false
         }
     }

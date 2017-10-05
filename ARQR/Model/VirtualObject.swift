@@ -13,7 +13,11 @@ import ARKit
 class VirtualObject: SCNNode {
     
     var id: String
-    var anchor: ARAnchor?
+    var anchor: ARAnchor
+    
+    var virtualButtons = [VirtualButton]()
+    var animations = [String]()
+    
     
     lazy var fileUrl: URL? = {
         
@@ -34,10 +38,10 @@ class VirtualObject: SCNNode {
         return url
     }()
     
-    init(id: String) {
+    init(id: String, anchor: ARAnchor) {
         self.id = id
+        self.anchor = anchor
         super.init()
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -57,9 +61,35 @@ class VirtualObject: SCNNode {
         for child in scene!.rootNode.childNodes {
             child.geometry?.firstMaterial?.lightingModel = .physicallyBased
             child.movabilityHint = .movable
-            //            child.scale = SCNVector3(x: 0.2, y: 0.2, z: 0.2)
+            
+            if let animationKey = child.animationKeys.first {
+                animations.append(animationKey)
+            }
             
             self.addChildNode(child)
+            
         }
+        
+        for key in animations {
+            
+            let button = VirtualButton()
+            button.title = key
+            button.action = {
+                self.playAnimation(named: key)
+            }
+           
+            virtualButtons.append(button)
+        }
+        
+        virtualButtons.first?.anchor = ARAnchor(transform: anchor.transform.translatedUp(-0.2))
+        
+        
     }
+    
+    func playAnimation(named animationName: String) {
+        
+        
+        
+    }
+    
 }
