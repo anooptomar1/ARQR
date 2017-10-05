@@ -9,21 +9,34 @@
 /* Begin PBXBuildFile section */
 		D13BB4281F836A820069016C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13BB4271F836A820069016C /* AppDelegate.swift */; };
 		D13BB42A1F836A820069016C /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = D13BB4291F836A820069016C /* art.scnassets */; };
-		D13BB42C1F836A820069016C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13BB42B1F836A820069016C /* ViewController.swift */; };
-		D13BB42F1F836A820069016C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D13BB42D1F836A820069016C /* Main.storyboard */; };
+		D13BB42C1F836A820069016C /* ARQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13BB42B1F836A820069016C /* ARQRViewController.swift */; };
 		D13BB4311F836A820069016C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D13BB4301F836A820069016C /* Assets.xcassets */; };
 		D13BB4341F836A820069016C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D13BB4321F836A820069016C /* LaunchScreen.storyboard */; };
+		D13BB43C1F8375530069016C /* QRScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13BB43B1F8375530069016C /* QRScanner.swift */; };
+		D18F78B21F84F7FF00C77189 /* Pods_ARQR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F778181017BC39824548F6D7 /* Pods_ARQR.framework */; };
+		D19A6A311F838B9D0009C8CE /* VirtualObjectsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19A6A301F838B9D0009C8CE /* VirtualObjectsManager.swift */; };
+		D19A6A331F83B6260009C8CE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19A6A321F83B6260009C8CE /* Extensions.swift */; };
+		D19A6A361F84CDE60009C8CE /* VirtualObjectInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19A6A351F84CDE60009C8CE /* VirtualObjectInfo.swift */; };
+		D19A6A381F84D0760009C8CE /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19A6A371F84D0760009C8CE /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		12F06464ECE5E3C99021125B /* Pods-ARQR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARQR.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ARQR/Pods-ARQR.debug.xcconfig"; sourceTree = "<group>"; };
+		9F1FD043231A42A8A9BEE674 /* Pods-ARQR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARQR.release.xcconfig"; path = "Pods/Target Support Files/Pods-ARQR/Pods-ARQR.release.xcconfig"; sourceTree = "<group>"; };
 		D13BB4241F836A820069016C /* ARQR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARQR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D13BB4271F836A820069016C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D13BB4291F836A820069016C /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
-		D13BB42B1F836A820069016C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		D13BB42E1F836A820069016C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D13BB42B1F836A820069016C /* ARQRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARQRViewController.swift; sourceTree = "<group>"; };
 		D13BB4301F836A820069016C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D13BB4331F836A820069016C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D13BB4351F836A820069016C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D13BB43B1F8375530069016C /* QRScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanner.swift; sourceTree = "<group>"; };
+		D18F78AA1F84F75700C77189 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D19A6A301F838B9D0009C8CE /* VirtualObjectsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObjectsManager.swift; sourceTree = "<group>"; };
+		D19A6A321F83B6260009C8CE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		D19A6A351F84CDE60009C8CE /* VirtualObjectInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObjectInfo.swift; sourceTree = "<group>"; };
+		D19A6A371F84D0760009C8CE /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		F778181017BC39824548F6D7 /* Pods_ARQR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARQR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +44,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D18F78B21F84F7FF00C77189 /* Pods_ARQR.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0738EF53FD02B90300DA119A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D18F78AA1F84F75700C77189 /* Alamofire.framework */,
+				F778181017BC39824548F6D7 /* Pods_ARQR.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D13BB41B1F836A820069016C = {
 			isa = PBXGroup;
 			children = (
 				D13BB4261F836A820069016C /* ARQR */,
 				D13BB4251F836A820069016C /* Products */,
+				D7A9B6B9C22A8FEB00D70475 /* Pods */,
+				0738EF53FD02B90300DA119A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +81,36 @@
 		D13BB4261F836A820069016C /* ARQR */ = {
 			isa = PBXGroup;
 			children = (
+				D19A6A341F84CDA50009C8CE /* Model */,
 				D13BB4271F836A820069016C /* AppDelegate.swift */,
+				D13BB42B1F836A820069016C /* ARQRViewController.swift */,
 				D13BB4291F836A820069016C /* art.scnassets */,
-				D13BB42B1F836A820069016C /* ViewController.swift */,
-				D13BB42D1F836A820069016C /* Main.storyboard */,
 				D13BB4301F836A820069016C /* Assets.xcassets */,
 				D13BB4321F836A820069016C /* LaunchScreen.storyboard */,
 				D13BB4351F836A820069016C /* Info.plist */,
+				D13BB43B1F8375530069016C /* QRScanner.swift */,
+				D19A6A301F838B9D0009C8CE /* VirtualObjectsManager.swift */,
+				D19A6A321F83B6260009C8CE /* Extensions.swift */,
 			);
 			path = ARQR;
+			sourceTree = "<group>";
+		};
+		D19A6A341F84CDA50009C8CE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D19A6A351F84CDE60009C8CE /* VirtualObjectInfo.swift */,
+				D19A6A371F84D0760009C8CE /* NetworkManager.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D7A9B6B9C22A8FEB00D70475 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				12F06464ECE5E3C99021125B /* Pods-ARQR.debug.xcconfig */,
+				9F1FD043231A42A8A9BEE674 /* Pods-ARQR.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +120,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D13BB4381F836A820069016C /* Build configuration list for PBXNativeTarget "ARQR" */;
 			buildPhases = (
+				F30156944E35E8FC33356225 /* [CP] Check Pods Manifest.lock */,
 				D13BB4201F836A820069016C /* Sources */,
 				D13BB4211F836A820069016C /* Frameworks */,
 				D13BB4221F836A820069016C /* Resources */,
+				43D7893FB416236DF09357BB /* [CP] Embed Pods Frameworks */,
+				5E2D279EC4B4C1B2CF8CB765 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -129,18 +178,78 @@
 				D13BB42A1F836A820069016C /* art.scnassets in Resources */,
 				D13BB4341F836A820069016C /* LaunchScreen.storyboard in Resources */,
 				D13BB4311F836A820069016C /* Assets.xcassets in Resources */,
-				D13BB42F1F836A820069016C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		43D7893FB416236DF09357BB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ARQR/Pods-ARQR-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Zip/Zip.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Zip.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ARQR/Pods-ARQR-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5E2D279EC4B4C1B2CF8CB765 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ARQR/Pods-ARQR-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F30156944E35E8FC33356225 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ARQR-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D13BB4201F836A820069016C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D13BB42C1F836A820069016C /* ViewController.swift in Sources */,
+				D19A6A361F84CDE60009C8CE /* VirtualObjectInfo.swift in Sources */,
+				D19A6A331F83B6260009C8CE /* Extensions.swift in Sources */,
+				D13BB43C1F8375530069016C /* QRScanner.swift in Sources */,
+				D13BB42C1F836A820069016C /* ARQRViewController.swift in Sources */,
+				D19A6A311F838B9D0009C8CE /* VirtualObjectsManager.swift in Sources */,
+				D19A6A381F84D0760009C8CE /* NetworkManager.swift in Sources */,
 				D13BB4281F836A820069016C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -148,14 +257,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		D13BB42D1F836A820069016C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D13BB42E1F836A820069016C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		D13BB4321F836A820069016C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -276,6 +377,7 @@
 		};
 		D13BB4391F836A820069016C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 12F06464ECE5E3C99021125B /* Pods-ARQR.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -291,6 +393,7 @@
 		};
 		D13BB43A1F836A820069016C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9F1FD043231A42A8A9BEE674 /* Pods-ARQR.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
