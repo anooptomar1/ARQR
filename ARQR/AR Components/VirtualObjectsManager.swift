@@ -11,8 +11,6 @@ import ARKit
 
 class VirtualObjectsManager {
     
-    private let basePath = "art.scnassets"
-    
     private var virtualObjects = [VirtualObject]()
     
     func clearObjects() {
@@ -24,7 +22,6 @@ class VirtualObjectsManager {
     }
     
     func virtualObjectFromAnchor(_ anchor: ARAnchor) -> SCNNode? {
-        
         
         if let virtualObject = virtualObjects.first(where: { $0.anchor == anchor }) {
             return virtualObject

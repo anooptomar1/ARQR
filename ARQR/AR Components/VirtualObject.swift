@@ -16,8 +16,7 @@ class VirtualObject: SCNNode {
     var anchor: ARAnchor
     
     var virtualButtonsContainer: VirtualButtonsContainer?
-    var animations = [String]()
-    
+    var animationNodes = [String: SCNNode]()
     
     lazy var fileUrl: URL? = {
         
@@ -58,41 +57,67 @@ class VirtualObject: SCNNode {
         let source = SCNSceneSource(url: url, options: nil)
         let scene = source?.scene(options: nil)
         
+        
+        var virtualButtons = [VirtualButton]()
+        
         for child in scene!.rootNode.childNodes {
             child.geometry?.firstMaterial?.lightingModel = .physicallyBased
             child.movabilityHint = .movable
             
             if let animationKey = child.animationKeys.first {
-                animations.append(animationKey)
+                
+                animationNodes[animationKey] = child
+                virtualButtons.append(createVirtualButtonWithKey(animationKey))
             }
             
             self.addChildNode(child)
-            
-        }
-        
-        var virtualButtons = [VirtualButton]()
-        
-        for key in animations {
-            
-            let button = VirtualButton()
-            button.title = key
-            button.action = {
-                self.playAnimation(named: key)
-            }
-           
-            virtualButtons.append(button)
         }
         
         let containerAnchor = ARAnchor(transform: anchor.transform.translatedUp(-0.2))
         virtualButtonsContainer = VirtualButtonsContainer(buttons: virtualButtons, anchor: containerAnchor)
-        
-        
     }
     
-    func playAnimation(named animationName: String) {
+    private func createVirtualButtonWithKey(_ key: String) -> VirtualButton {
         
+        let button = VirtualButton()
+        button.title = key
+        button.onAction = { [weak self] in
+            self?.playAnimation(named: key)
+        }
+        button.offAction = { [weak self] in
+            self?.pauseAnimation(named: key)
+        }
         
+        button.highlighted = true
+        return button
+    }
+    
+    private func playAnimation(named animationName: String) {
         
+        print("Animation: \(animationName)")
+        
+        for child in self.childNodes {
+            if let animationPlayer = child.animationPlayer(forKey: animationName) {
+                
+                if animationPlayer.paused {
+                    animationPlayer.play()
+                } else {
+                    animationPlayer.speed = 1
+                }
+            }
+        }
+    }
+    
+    private func pauseAnimation(named animationName: String) {
+        
+        print("Animation: \(animationName)")
+        
+        for child in self.childNodes {
+            if let animationPlayer = child.animationPlayer(forKey: animationName) {
+                
+                animationPlayer.speed = 0
+            }
+        }
     }
     
 }

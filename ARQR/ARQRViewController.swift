@@ -21,7 +21,7 @@ class ARQRViewController: UIViewController {
     
     var processing = false
     
-    var floatingHeight: Float = 0.5
+    var floatingHeight: Float = 0.4
 }
 
 // MARK: - Lifecycle
@@ -80,12 +80,7 @@ extension ARQRViewController {
         NSLayoutConstraint.activate([
             resetButton.leftAnchor.constraint(equalTo: view.leftAnchor),
             resetButton.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-//            resetButton.heightAnchor.constraint(equalToConstant: 10.0),
-//            resetButton.widthAnchor.constraint(equalToConstant: 30)
             ])
-        
-        
-        
     }
     
     private func startSession(reset: Bool = false) {
@@ -105,23 +100,20 @@ extension ARQRViewController {
         sceneView.session.pause()
     }
     
-    @objc func resetButtonPressed(sender: UIButton) {
-        
+    @objc
+    func resetButtonPressed(sender: UIButton) {
         startSession(reset: true)
-        
     }
     
     @objc
     func handleTap(gestureRecognize: UITapGestureRecognizer) {
         
         let position = gestureRecognize.location(ofTouch: 0, in: sceneView)
-        
-        if let button = virtualButton(at: position) {
-            
-        }
+        virtualButton(at: position)?.tapped()
     }
     
     private func virtualButton(at point: CGPoint) -> VirtualButton?  {
+        
         let hitTestOptions: [SCNHitTestOption: Any] = [.boundingBoxOnly: true]
         let hitTestResults: [SCNHitTestResult] = sceneView.hitTest(point, options: hitTestOptions)
         
@@ -141,7 +133,6 @@ extension ARQRViewController {
         
         return nil
     }
-
 }
 
 // MARK: - ARSCNViewDelegate
@@ -203,7 +194,7 @@ extension ARQRViewController: ARSessionDelegate {
         
         self.virtualObjectsManager.loadVirtualObjectFromId(newQRCode.objectId, withAnchor: anchor) { virtualObject in
             
-            self.sceneView.session.add(anchor: anchor)
+            self.sceneView.session.add(anchor: virtualObject.anchor)
             self.sceneView.session.add(anchor: virtualObject.virtualButtonsContainer!.anchor)
             
             self.processing = false
@@ -212,18 +203,11 @@ extension ARQRViewController: ARSessionDelegate {
     
     private func anchorOnPlaneBehind(_ qrCode: QRCode, in frame: ARFrame) -> ARAnchor? {
         
-        // Get bottom center
         let center = CGPoint(x: qrCode.frame.midX, y: qrCode.frame.maxY)
-        
-        // Perform a hit test on the ARFrame to find a surface
         let hitTestResults = frame.hitTest(center, types: [.featurePoint/*, .estimatedHorizontalPlane, .existingPlane, .existingPlaneUsingExtent*/] )
         
         guard let hitTestResult = hitTestResults.first else { return nil } // No plane
         
-        // Create an anchor. The node will be created in delegate methods
         return ARAnchor(transform: hitTestResult.worldTransform.translatedUp(floatingHeight))
-        
-        
     }
-    
 }

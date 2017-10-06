@@ -10,7 +10,6 @@
 		D13BB4281F836A820069016C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13BB4271F836A820069016C /* AppDelegate.swift */; };
 		D13BB42A1F836A820069016C /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = D13BB4291F836A820069016C /* art.scnassets */; };
 		D13BB42C1F836A820069016C /* ARQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13BB42B1F836A820069016C /* ARQRViewController.swift */; };
-		D13BB4311F836A820069016C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D13BB4301F836A820069016C /* Assets.xcassets */; };
 		D13BB4341F836A820069016C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D13BB4321F836A820069016C /* LaunchScreen.storyboard */; };
 		D13BB43C1F8375530069016C /* QRScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13BB43B1F8375530069016C /* QRScanner.swift */; };
 		D18F78B21F84F7FF00C77189 /* Pods_ARQR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F778181017BC39824548F6D7 /* Pods_ARQR.framework */; };
@@ -30,7 +29,6 @@
 		D13BB4271F836A820069016C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D13BB4291F836A820069016C /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		D13BB42B1F836A820069016C /* ARQRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARQRViewController.swift; sourceTree = "<group>"; };
-		D13BB4301F836A820069016C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D13BB4331F836A820069016C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D13BB4351F836A820069016C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D13BB43B1F8375530069016C /* QRScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanner.swift; sourceTree = "<group>"; };
@@ -42,6 +40,7 @@
 		D1B0AFDC1F862948008F063E /* VirtualObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObject.swift; sourceTree = "<group>"; };
 		D1B0AFDE1F864DBD008F063E /* VirtualButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualButton.swift; sourceTree = "<group>"; };
 		D1B0AFE01F866853008F063E /* VirtualButtonsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualButtonsContainer.swift; sourceTree = "<group>"; };
+		D1B0B0061F87BD54008F063E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = /Users/walter/Documents/Dev/ARQR/ARQR/Assets.xcassets; sourceTree = "<absolute>"; };
 		F778181017BC39824548F6D7 /* Pods_ARQR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARQR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -87,30 +86,46 @@
 		D13BB4261F836A820069016C /* ARQR */ = {
 			isa = PBXGroup;
 			children = (
-				D19A6A341F84CDA50009C8CE /* Model */,
-				D13BB4271F836A820069016C /* AppDelegate.swift */,
-				D13BB42B1F836A820069016C /* ARQRViewController.swift */,
-				D13BB4291F836A820069016C /* art.scnassets */,
-				D13BB4301F836A820069016C /* Assets.xcassets */,
-				D13BB4321F836A820069016C /* LaunchScreen.storyboard */,
 				D13BB4351F836A820069016C /* Info.plist */,
-				D13BB43B1F8375530069016C /* QRScanner.swift */,
-				D19A6A301F838B9D0009C8CE /* VirtualObjectsManager.swift */,
-				D19A6A321F83B6260009C8CE /* Extensions.swift */,
-				D1B0AFDE1F864DBD008F063E /* VirtualButton.swift */,
-				D1B0AFE01F866853008F063E /* VirtualButtonsContainer.swift */,
+				D13BB4321F836A820069016C /* LaunchScreen.storyboard */,
+				D13BB4271F836A820069016C /* AppDelegate.swift */,
+				D13BB4291F836A820069016C /* art.scnassets */,
+				D1B0B0061F87BD54008F063E /* Assets.xcassets */,
+				D13BB42B1F836A820069016C /* ARQRViewController.swift */,
+				D1B0B0051F87BC94008F063E /* AR Components */,
+				D19A6A341F84CDA50009C8CE /* Data */,
+				D1B0B0041F87BC5B008F063E /* Utils */,
 			);
 			path = ARQR;
 			sourceTree = "<group>";
 		};
-		D19A6A341F84CDA50009C8CE /* Model */ = {
+		D19A6A341F84CDA50009C8CE /* Data */ = {
 			isa = PBXGroup;
 			children = (
 				D19A6A351F84CDE60009C8CE /* VirtualObjectInfo.swift */,
 				D19A6A371F84D0760009C8CE /* NetworkManager.swift */,
-				D1B0AFDC1F862948008F063E /* VirtualObject.swift */,
 			);
-			path = Model;
+			path = Data;
+			sourceTree = "<group>";
+		};
+		D1B0B0041F87BC5B008F063E /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				D13BB43B1F8375530069016C /* QRScanner.swift */,
+				D19A6A321F83B6260009C8CE /* Extensions.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		D1B0B0051F87BC94008F063E /* AR Components */ = {
+			isa = PBXGroup;
+			children = (
+				D1B0AFE01F866853008F063E /* VirtualButtonsContainer.swift */,
+				D1B0AFDE1F864DBD008F063E /* VirtualButton.swift */,
+				D1B0AFDC1F862948008F063E /* VirtualObject.swift */,
+				D19A6A301F838B9D0009C8CE /* VirtualObjectsManager.swift */,
+			);
+			path = "AR Components";
 			sourceTree = "<group>";
 		};
 		D7A9B6B9C22A8FEB00D70475 /* Pods */ = {
@@ -186,7 +201,6 @@
 			files = (
 				D13BB42A1F836A820069016C /* art.scnassets in Resources */,
 				D13BB4341F836A820069016C /* LaunchScreen.storyboard in Resources */,
-				D13BB4311F836A820069016C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

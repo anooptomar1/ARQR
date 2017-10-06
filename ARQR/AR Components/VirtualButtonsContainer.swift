@@ -19,21 +19,29 @@ class VirtualButtonsContainer: SCNNode {
         self.anchor = anchor
         super.init()
         
-        let height: CGFloat = 0.1
         let width: CGFloat = CGFloat(buttons.count) * 0.1
+        let height: CGFloat = 0.1
         
-        let spriteKitScene = SKScene(size: CGSize(width: width*100.0, height: height*100.0))
-        spriteKitScene.backgroundColor = UIColor.red
+        let skScenewidth: CGFloat = 1000 * width
+        let skSceneHeight: CGFloat = 1000 * height
         
-        let imagePlane = SCNPlane(width: width, height: height)
-        imagePlane.firstMaterial?.isDoubleSided = true
-        imagePlane.firstMaterial?.diffuse.contents = spriteKitScene
         
-        self.geometry = imagePlane
+        let skScene = SKScene(size: CGSize(width: skScenewidth, height: skSceneHeight))
+        skScene.backgroundColor = UIColor.clear
+        
+        
+        let plane = SCNPlane(width: width, height: height)
+        let material = SCNMaterial()
+        material.isDoubleSided = true
+        material.diffuse.contents = skScene
+        plane.materials = [material]
+        self.geometry = plane
         
         let billboardYConstraint = SCNBillboardConstraint()
         billboardYConstraint.freeAxes = SCNBillboardAxis.Y
         self.constraints = [billboardYConstraint]
+        
+
         
         for button in buttons {
             addChildNode(button)
