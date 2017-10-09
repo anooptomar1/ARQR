@@ -23,14 +23,14 @@ class NetworkManager: NSObject {
     let baseURL = "https://y6yqghqt69.execute-api.eu-west-1.amazonaws.com/prototype/api/v1"
     let resourcePath = "/resource"
     
-    func getObjectInfoWithId(_ id: String, onCompletion: @escaping (VirtualObjectInfo) -> Void) {
+    func getObjectInfoWithId(_ id: String, onCompletion: @escaping (VirtualObjectInfo, Error?) -> Void) {
         let route = "\(baseURL)\(resourcePath)/\(id)"
-        makeHTTPGetRequest(path: route, onCompletion: { data, err in
+        makeHTTPGetRequest(path: route, onCompletion: { data, error in
             
             do {
                 //Decode retrived data with JSONDecoder and assing type of Article object
                 let objectInfo = try JSONDecoder().decode(VirtualObjectInfo.self, from: data)
-                onCompletion(objectInfo)
+                onCompletion(objectInfo, error)
                 
             } catch let jsonError {
                 print(jsonError)

@@ -192,13 +192,10 @@ extension ARQRViewController: ARSessionDelegate {
             return
         }
         
-        self.virtualObjectsManager.loadVirtualObjectFromId(newQRCode.objectId, withAnchor: anchor) { virtualObject in
-            
-            self.sceneView.session.add(anchor: virtualObject.anchor)
-            self.sceneView.session.add(anchor: virtualObject.virtualButtonsContainer!.anchor)
-            
-            self.processing = false
-        }
+        let virtualObject = virtualObjectsManager.loadVirtualObjectFromId(newQRCode.objectId, withAnchor: anchor)
+        sceneView.session.add(anchor: virtualObject.anchor)
+        processing = false
+        
     }
     
     private func anchorOnPlaneBehind(_ qrCode: QRCode, in frame: ARFrame) -> ARAnchor? {

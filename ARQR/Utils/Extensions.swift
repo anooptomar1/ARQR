@@ -8,6 +8,7 @@
 
 import Foundation
 import ARKit
+import SceneKit
 
 extension simd_float4x4 {
     
@@ -30,4 +31,14 @@ extension simd_float4x4 {
     }
 
 
+}
+
+extension simd_float3 {
+    
+    func addHeight(_ translation: Float) -> simd_float3 {
+        
+        return simd_float3(self.x, self.y + translation, self.z)
+        
+    }
+    
 }

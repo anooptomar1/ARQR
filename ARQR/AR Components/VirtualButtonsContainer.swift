@@ -13,10 +13,7 @@ import ARKit
 
 class VirtualButtonsContainer: SCNNode {
     
-    var anchor: ARAnchor
-    
-    init(buttons: [VirtualButton], anchor: ARAnchor) {
-        self.anchor = anchor
+    init(buttons: [VirtualButton]) {
         super.init()
         
         let width: CGFloat = CGFloat(buttons.count) * 0.1

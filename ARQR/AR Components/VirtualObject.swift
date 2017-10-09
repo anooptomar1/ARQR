@@ -41,13 +41,66 @@ class VirtualObject: SCNNode {
         self.id = id
         self.anchor = anchor
         super.init()
+        
+        self.load()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func load() {
+    private func load() {
+        
+        addLoadingNode()
+        
+        loadAssets() { error in
+            
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            
+            self.removeLoadingNode()
+            
+        }
+    }
+    
+    private func addLoadingNode() {
+        
+    }
+    
+    private func removeLoadingNode() {
+        
+    }
+    
+    private func loadAssets(_ completionHandler: @escaping (Error?) -> Void) {
+        
+        let completionHandlerOnMain = { (error: Error?) in
+            DispatchQueue.main.async {
+                completionHandler(error)
+            }
+        }
+        
+        DispatchQueue.global(qos: .background).async {
+            
+            self.loadAssetsFromFile()
+            completionHandlerOnMain(nil)
+            
+//            NetworkManager.shared.getObjectInfoWithId(self.id) { objectInfo, error in
+//                if let error = error { completionHandlerOnMain(error); return }
+//
+//                NetworkManager.shared.downloadFileForVirtualObject(objectInfo) { error in
+//                    if let error = error { completionHandlerOnMain(error); return }
+//
+//                    self.loadAssetsFromFile()
+//                    completionHandlerOnMain(nil)
+//                }
+//            }
+            
+        }
+    }
+    
+    private func loadAssetsFromFile() {
         
         guard let url = fileUrl else {
             // no scene file
@@ -73,8 +126,9 @@ class VirtualObject: SCNNode {
             self.addChildNode(child)
         }
         
-        let containerAnchor = ARAnchor(transform: anchor.transform.translatedUp(-0.2))
-        virtualButtonsContainer = VirtualButtonsContainer(buttons: virtualButtons, anchor: containerAnchor)
+        virtualButtonsContainer = VirtualButtonsContainer(buttons: virtualButtons)
+        self.addChildNode(virtualButtonsContainer!)
+        virtualButtonsContainer?.simdPosition = self.simdPosition.addHeight(-0.2)
     }
     
     private func createVirtualButtonWithKey(_ key: String) -> VirtualButton {
