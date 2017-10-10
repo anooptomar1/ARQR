@@ -16,7 +16,7 @@ class VirtualButtonsContainer: SCNNode {
     init(buttons: [VirtualButton]) {
         super.init()
         
-        let width: CGFloat = CGFloat(buttons.count) * 0.1
+        let width: CGFloat = 0.1 + CGFloat(buttons.count) * 0.1
         let height: CGFloat = 0.1
         
         let skScenewidth: CGFloat = 1000 * width

@@ -20,6 +20,14 @@ extension simd_float4x4 {
         return matrix_multiply(self, translation)
     }
     
+    func translatedforward(_ distance: Float) -> simd_float4x4 {
+        
+        var translation = matrix_identity_float4x4
+        translation.columns.3.z = distance
+        
+        return matrix_multiply(self, translation)
+    }
+    
 }
 
 extension simd_float4x4 {

@@ -32,7 +32,7 @@ class VirtualObject: SCNNode {
 //                break
 //            }
 //        }
-        let url = Bundle.main.urls(forResourcesWithExtension: "dae", subdirectory: "art.scnassets/Battery")?.first
+        let url = Bundle.main.urls(forResourcesWithExtension: "dae", subdirectory: "art.scnassets/Earth")?.first
         
         return url
     }()
