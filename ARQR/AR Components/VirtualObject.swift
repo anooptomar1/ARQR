@@ -32,7 +32,7 @@ class VirtualObject: SCNNode {
 //                break
 //            }
 //        }
-        let url = Bundle.main.urls(forResourcesWithExtension: "dae", subdirectory: "art.scnassets/Battery")?.first
+        let url = Bundle.main.urls(forResourcesWithExtension: "dae", subdirectory: "art.scnassets/Earth")?.first
         
         return url
     }()
@@ -73,7 +73,7 @@ class VirtualObject: SCNNode {
             self.addChildNode(child)
         }
         
-        let containerAnchor = ARAnchor(transform: anchor.transform.translatedUp(-0.2))
+        let containerAnchor = ARAnchor(transform: anchor.transform.translatedUp(-0.0).translatedforward(0.5))
         virtualButtonsContainer = VirtualButtonsContainer(buttons: virtualButtons, anchor: containerAnchor)
     }
     
