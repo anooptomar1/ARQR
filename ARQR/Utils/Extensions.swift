@@ -49,4 +49,26 @@ extension simd_float3 {
         
     }
     
+    func moveForward(_ translation: Float) -> simd_float3 {
+        
+        return simd_float3(self.x, self.y, self.z + translation)
+        
+    }
+    
+}
+
+extension SCNVector3 {
+    
+    func addHeight(_ translation: Float) -> SCNVector3 {
+        
+        return SCNVector3(self.x, self.y + translation, self.z)
+        
+    }
+    
+    func moveForward(_ translation: Float) -> SCNVector3 {
+        
+        return SCNVector3(self.x, self.y, self.z + translation)
+        
+    }
+    
 }

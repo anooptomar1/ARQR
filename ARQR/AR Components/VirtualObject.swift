@@ -16,6 +16,8 @@ class VirtualObject: SCNNode {
     var anchor: ARAnchor
     
     var virtualButtonsContainer: VirtualButtonsContainer?
+    var loadingNode: SCNParticleSystem?
+    
     var animationNodes = [String: SCNNode]()
     
     lazy var fileUrl: URL? = {
@@ -59,7 +61,7 @@ class VirtualObject: SCNNode {
                 print(error.localizedDescription)
                 return
             }
-            
+            print("LOADED")
             self.removeLoadingNode()
             
         }
@@ -67,9 +69,14 @@ class VirtualObject: SCNNode {
     
     private func addLoadingNode() {
         
+//        loadingNode = SCNParticleSystem(named: "Loading", inDirectory: "art.scnassets/Loading")
+//        self.addParticleSystem(loadingNode!)
+        
     }
     
     private func removeLoadingNode() {
+        
+//        self.removeParticleSystem(loadingNode!)
         
     }
     
@@ -82,6 +89,8 @@ class VirtualObject: SCNNode {
         }
         
         DispatchQueue.global(qos: .background).async {
+            
+            sleep(1)
             
             self.loadAssetsFromFile()
             completionHandlerOnMain(nil)
@@ -128,7 +137,8 @@ class VirtualObject: SCNNode {
         
         virtualButtonsContainer = VirtualButtonsContainer(buttons: virtualButtons)
         self.addChildNode(virtualButtonsContainer!)
-        virtualButtonsContainer?.simdPosition = self.simdPosition.addHeight(-0.2)
+        virtualButtonsContainer?.position = self.position.addHeight(-0.0).moveForward(0.5)
+//        virtualButtonsContainer?.simdPosition = self.simdPosition.addHeight(-0.0).moveForward(0.5)
     }
     
     private func createVirtualButtonWithKey(_ key: String) -> VirtualButton {
@@ -156,7 +166,7 @@ class VirtualObject: SCNNode {
                 if animationPlayer.paused {
                     animationPlayer.play()
                 } else {
-                    animationPlayer.speed = 1
+                    animationPlayer.speed = 0.5
                 }
             }
         }
