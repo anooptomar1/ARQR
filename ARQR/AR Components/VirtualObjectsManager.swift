@@ -48,7 +48,7 @@ class VirtualObjectsManager {
 extension VirtualObjectsManager: VirtualObjectDelegate {
     
     func prepare(node: SCNNode, completionHandler: @escaping () -> Void) {
-        sceneView?.prepare([node]) { _ in
+        sceneView!.prepare([node]) { _ in
             
             completionHandler()
             

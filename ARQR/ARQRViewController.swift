@@ -31,12 +31,11 @@ extension ARQRViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        virtualObjectsManager = VirtualObjectsManager()
-        virtualObjectsManager.sceneView = sceneView
-        
         setupSceneView()
         setupResetButton()
         
+        virtualObjectsManager = VirtualObjectsManager()
+        virtualObjectsManager.sceneView = sceneView
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         sceneView.addGestureRecognizer(tapGesture)

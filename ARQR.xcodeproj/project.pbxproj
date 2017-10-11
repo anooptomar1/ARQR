@@ -20,6 +20,7 @@
 		D1B0AFDD1F862948008F063E /* VirtualObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B0AFDC1F862948008F063E /* VirtualObject.swift */; };
 		D1B0AFDF1F864DBD008F063E /* VirtualButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B0AFDE1F864DBD008F063E /* VirtualButton.swift */; };
 		D1B0AFE11F866853008F063E /* VirtualButtonsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B0AFE01F866853008F063E /* VirtualButtonsContainer.swift */; };
+		D1CBDCCA1F8E3392001AD067 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1B0B0061F87BD54008F063E /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -200,6 +201,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D13BB42A1F836A820069016C /* art.scnassets in Resources */,
+				D1CBDCCA1F8E3392001AD067 /* Assets.xcassets in Resources */,
 				D13BB4341F836A820069016C /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

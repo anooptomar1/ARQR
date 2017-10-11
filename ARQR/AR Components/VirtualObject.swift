@@ -140,12 +140,14 @@ class VirtualObject: SCNNode {
             wrapperNode.addChildNode(child)
         }
         
-        self.virtualButtonsContainer = VirtualButtonsContainer(buttons: virtualButtons)
-        wrapperNode.addChildNode(self.virtualButtonsContainer!)
-        self.virtualButtonsContainer?.simdWorldTransform = self.simdWorldTransform.translatedUp(0.0).translatedforward(0.5)
+
         
-        delegate?.prepare(node: wrapperNode) {
+        delegate!.prepare(node: wrapperNode) {
             self.addChildNode(wrapperNode)
+            
+            self.virtualButtonsContainer = VirtualButtonsContainer(buttons: virtualButtons)
+            wrapperNode.addChildNode(self.virtualButtonsContainer!)
+            self.virtualButtonsContainer?.simdWorldTransform = self.simdWorldTransform.translatedUp(0.0).translatedforward(0.5)
         }
         
     }
@@ -169,7 +171,7 @@ class VirtualObject: SCNNode {
         
         print("Animation: \(animationName)")
         
-        for child in self.childNodes {
+        for child in self.childNodes.first!.childNodes {
             if let animationPlayer = child.animationPlayer(forKey: animationName) {
                 
                 if animationPlayer.paused {
@@ -185,7 +187,7 @@ class VirtualObject: SCNNode {
         
         print("Animation: \(animationName)")
         
-        for child in self.childNodes {
+        for child in self.childNodes.first!.childNodes {
             if let animationPlayer = child.animationPlayer(forKey: animationName) {
                 
                 animationPlayer.speed = 0
