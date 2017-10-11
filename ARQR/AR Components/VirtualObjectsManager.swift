@@ -11,6 +11,8 @@ import ARKit
 
 class VirtualObjectsManager {
     
+    
+    var sceneView: ARSCNView?
     private var virtualObjects = [VirtualObject]()
     
     func clearObjects() {
@@ -33,14 +35,27 @@ class VirtualObjectsManager {
     func loadVirtualObjectFromId(_ id: String,withAnchor anchor: ARAnchor) -> VirtualObject {
         print("Loading ID: \(id)")
         
-        return self.loadVirtualObjectWithId(id, anchor: anchor)
-        
-    }
-    
-    private func loadVirtualObjectWithId(_ id: String, anchor: ARAnchor) -> VirtualObject {
-        
         let virtualObject = VirtualObject(id: id, anchor: anchor)
+        virtualObject.delegate = self
+        virtualObject.load()
+        
         virtualObjects.append(virtualObject)
         return virtualObject
+        
     }
+}
+
+extension VirtualObjectsManager: VirtualObjectDelegate {
+    
+    func prepare(node: SCNNode, completionHandler: @escaping () -> Void) {
+        sceneView?.prepare([node]) { _ in
+            
+            completionHandler()
+            
+        }
+    }
+    
+    
+    
+    
 }

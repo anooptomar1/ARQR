@@ -40,9 +40,10 @@ class VirtualButtonsContainer: SCNNode {
         
 
         
-        for button in buttons {
+        for (index,button) in buttons.enumerated() {
             addChildNode(button)
             button.position.z += 0.01
+            button.position.y -= Float(index) * 0.055
         }
         
     }

@@ -40,7 +40,7 @@
 		D1B0AFDC1F862948008F063E /* VirtualObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObject.swift; sourceTree = "<group>"; };
 		D1B0AFDE1F864DBD008F063E /* VirtualButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualButton.swift; sourceTree = "<group>"; };
 		D1B0AFE01F866853008F063E /* VirtualButtonsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualButtonsContainer.swift; sourceTree = "<group>"; };
-		D1B0B0061F87BD54008F063E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = /Users/walter/Documents/Dev/ARQR/ARQR/Assets.xcassets; sourceTree = "<absolute>"; };
+		D1B0B0061F87BD54008F063E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F778181017BC39824548F6D7 /* Pods_ARQR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARQR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 

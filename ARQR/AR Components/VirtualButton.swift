@@ -40,7 +40,7 @@ class VirtualButton: SCNNode {
         backgroundImageNode.position = CGPoint(x: skScenewidth/2, y: skSceneHeight/2)
         
         let label = SKLabelNode()
-        label.text = "Rotate"
+        label.text = "Button"
         label.fontSize = 100
         label.fontName = UIFont.boldSystemFont(ofSize: 100).fontName
         label.yScale = -1

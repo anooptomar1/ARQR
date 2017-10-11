@@ -32,6 +32,7 @@ extension ARQRViewController {
         super.viewDidLoad()
         
         virtualObjectsManager = VirtualObjectsManager()
+        virtualObjectsManager.sceneView = sceneView
         
         setupSceneView()
         setupResetButton()
@@ -142,7 +143,14 @@ extension ARQRViewController: ARSCNViewDelegate {
     // Override to create and configure nodes for anchors added to the view's session.
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
         
-        return virtualObjectsManager.virtualObjectFromAnchor(anchor)
+        let object = virtualObjectsManager.virtualObjectFromAnchor(anchor)
+        
+        if let object = object {
+            print("node found")
+        }
+        
+        return object
+        
     }
     
     func session(_ session: ARSession, didFailWithError error: Error) {
@@ -195,6 +203,9 @@ extension ARQRViewController: ARSessionDelegate {
         let virtualObject = virtualObjectsManager.loadVirtualObjectFromId(newQRCode.objectId, withAnchor: anchor)
         sceneView.session.add(anchor: virtualObject.anchor)
         processing = false
+        
+        
+
         
     }
     

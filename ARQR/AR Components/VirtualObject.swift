@@ -20,6 +20,8 @@ class VirtualObject: SCNNode {
     
     var animationNodes = [String: SCNNode]()
     
+    weak var delegate: VirtualObjectDelegate?
+    
     lazy var fileUrl: URL? = {
         
 //        let fileManager = FileManager()
@@ -42,16 +44,17 @@ class VirtualObject: SCNNode {
     init(id: String, anchor: ARAnchor) {
         self.id = id
         self.anchor = anchor
+        
         super.init()
         
-        self.load()
+//        self.load()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func load() {
+    func load() {
         
         addLoadingNode()
         
@@ -90,7 +93,7 @@ class VirtualObject: SCNNode {
         
         DispatchQueue.global(qos: .background).async {
             
-            sleep(1)
+            sleep(2)
             
             self.loadAssetsFromFile()
             completionHandlerOnMain(nil)
@@ -122,6 +125,8 @@ class VirtualObject: SCNNode {
         
         var virtualButtons = [VirtualButton]()
         
+        let wrapperNode = SCNNode()
+        
         for child in scene!.rootNode.childNodes {
             child.geometry?.firstMaterial?.lightingModel = .physicallyBased
             child.movabilityHint = .movable
@@ -132,13 +137,17 @@ class VirtualObject: SCNNode {
                 virtualButtons.append(createVirtualButtonWithKey(animationKey))
             }
             
-            self.addChildNode(child)
+            wrapperNode.addChildNode(child)
         }
         
-        virtualButtonsContainer = VirtualButtonsContainer(buttons: virtualButtons)
-        self.addChildNode(virtualButtonsContainer!)
-        virtualButtonsContainer?.position = self.position.addHeight(-0.0).moveForward(0.5)
-//        virtualButtonsContainer?.simdPosition = self.simdPosition.addHeight(-0.0).moveForward(0.5)
+        self.virtualButtonsContainer = VirtualButtonsContainer(buttons: virtualButtons)
+        wrapperNode.addChildNode(self.virtualButtonsContainer!)
+        self.virtualButtonsContainer?.simdWorldTransform = self.simdWorldTransform.translatedUp(0.0).translatedforward(0.5)
+        
+        delegate?.prepare(node: wrapperNode) {
+            self.addChildNode(wrapperNode)
+        }
+        
     }
     
     private func createVirtualButtonWithKey(_ key: String) -> VirtualButton {
@@ -166,7 +175,7 @@ class VirtualObject: SCNNode {
                 if animationPlayer.paused {
                     animationPlayer.play()
                 } else {
-                    animationPlayer.speed = 0.5
+                    animationPlayer.speed = 0.2
                 }
             }
         }
@@ -185,3 +194,9 @@ class VirtualObject: SCNNode {
     }
     
 }
+
+protocol VirtualObjectDelegate: class  {
+    
+    func prepare(node: SCNNode, completionHandler: @escaping () -> Void)
+}
+
