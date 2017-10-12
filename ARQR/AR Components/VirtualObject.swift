@@ -180,11 +180,23 @@ class VirtualObject: SCNNode {
 
         virtualButtons.append(playPauseButton)
         
+        let orbitsButton = VirtualButton(title: "Orbit")
+        orbitsButton.onAction = {
+            self.setOpacityOnNodesWithName("Axis", to: 1.0, onBaseNode: self)
+        }
+        orbitsButton.offAction = {
+            self.setOpacityOnNodesWithName("Axis", to: 0.0, onBaseNode: self)
+        }
+        
+        
+        
+        virtualButtons.append(orbitsButton)
+        
         delegate!.prepare(node: wrapperNode) {
             
             self.virtualButtonsContainer = VirtualButtonsContainer(buttons: virtualButtons)
             wrapperNode.addChildNode(self.virtualButtonsContainer!)
-            self.virtualButtonsContainer?.simdWorldTransform = wrapperNode.simdWorldTransform.translatedUp(0.35).translatedforward(0.0)
+            self.virtualButtonsContainer?.simdWorldTransform = wrapperNode.simdWorldTransform.translatedUp(0.25).translatedforward(0.0)
             
             let scaleFactor: CGFloat = 0.1
             wrapperNode.scale = SCNVector3(scaleFactor, scaleFactor, scaleFactor)
@@ -201,7 +213,7 @@ class VirtualObject: SCNNode {
             wrapperNode.runAction(fadeIn)
             self.virtualButtonsContainer?.runAction(fadeIn)
             
-            
+            orbitsButton.tapped()
             self.removeLoadingNode()
         }
         
@@ -254,6 +266,17 @@ class VirtualObject: SCNNode {
         if let node = animationNodes[animationName], let animationPlayer = node.animationPlayer(forKey: animationName) {
             
             animationPlayer.speed = 0.0
+        }
+    }
+    
+    private func setOpacityOnNodesWithName(_ name: String,to value: CGFloat, onBaseNode node: SCNNode) {
+        
+        for childNode in node.childNodes {
+            if childNode.name?.contains(name) ?? false {
+                childNode.opacity = value
+            }
+            
+            setOpacityOnNodesWithName(name, to: value, onBaseNode: childNode)
         }
     }
     
