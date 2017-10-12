@@ -198,7 +198,7 @@ class VirtualObject: SCNNode {
             
             self.virtualButtonsContainer = VirtualButtonsContainer(buttons: virtualButtons)
             wrapperNode.addChildNode(self.virtualButtonsContainer!)
-            self.virtualButtonsContainer?.simdWorldTransform = wrapperNode.simdWorldTransform.translatedUp(0.25).translatedforward(0.0)
+            self.virtualButtonsContainer?.simdWorldTransform = wrapperNode.simdWorldTransform.translatedUp(0.30).translatedforward(0.0)
             
             let scaleFactor: CGFloat = 0.1
             wrapperNode.scale = SCNVector3(scaleFactor, scaleFactor, scaleFactor)

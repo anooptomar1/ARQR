@@ -245,7 +245,7 @@ extension ARQRViewController: ARSessionDelegate {
     
     private func anchorOnPlaneBehind(_ qrCode: QRCode, in frame: ARFrame) -> ARAnchor? {
         
-        let center = CGPoint(x: qrCode.frame.midX, y: qrCode.frame.maxY)
+        let center = CGPoint(x: qrCode.frame.midX, y: qrCode.frame.midY)
         let hitTestResults = frame.hitTest(center, types: [.featurePoint/*, .estimatedHorizontalPlane, .existingPlane, .existingPlaneUsingExtent*/] )
         
         guard let hitTestResult = hitTestResults.first else { return nil } // No plane
