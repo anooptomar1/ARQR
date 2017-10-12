@@ -58,6 +58,6 @@ struct QRCode {
     
     var objectId: String {
 //        return "whale"
-        return "3cf5da8a-2ec4-418a-bc91-449391258592"
+        return payload
     }
 }

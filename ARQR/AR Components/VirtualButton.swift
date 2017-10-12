@@ -15,7 +15,9 @@ class VirtualButton: SCNNode {
     
     var backgroundImageNode: SKSpriteNode
     var title: String?
-    var highlighted = false {
+    
+    
+    var highlighted = true {
         didSet {
             updateButtonState()
         }
@@ -24,7 +26,7 @@ class VirtualButton: SCNNode {
     var onAction: (() -> Void)?
     var offAction: (() -> Void)?
     
-    override init() {
+    init(title: String) {
         
         let width: CGFloat =  0.1
         let height: CGFloat = 0.05
@@ -40,7 +42,7 @@ class VirtualButton: SCNNode {
         backgroundImageNode.position = CGPoint(x: skScenewidth/2, y: skSceneHeight/2)
         
         let label = SKLabelNode()
-        label.text = "Button"
+        label.text = title
         label.fontSize = 100
         label.fontName = UIFont.boldSystemFont(ofSize: 100).fontName
         label.yScale = -1

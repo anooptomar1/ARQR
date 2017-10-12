@@ -16,7 +16,7 @@ class VirtualObject: SCNNode {
     var anchor: ARAnchor
     
     var virtualButtonsContainer: VirtualButtonsContainer?
-    var loadingNode: SCNParticleSystem?
+    var loadingNode: SCNNode?
     
     var animationNodes = [String: SCNNode]()
     
@@ -36,7 +36,10 @@ class VirtualObject: SCNNode {
 //                break
 //            }
 //        }
-        let url = Bundle.main.urls(forResourcesWithExtension: "dae", subdirectory: "art.scnassets/Earth")?.first
+        
+        let directory = id == "0001" ? "art.scnassets/SolarSystem" : "art.scnassets/Earth"
+        
+        let url = Bundle.main.urls(forResourcesWithExtension: "dae", subdirectory: directory)?.first
         
         return url
     }()
@@ -65,21 +68,53 @@ class VirtualObject: SCNNode {
                 return
             }
             print("LOADED")
-            self.removeLoadingNode()
+            
             
         }
     }
     
     private func addLoadingNode() {
         
-//        loadingNode = SCNParticleSystem(named: "Loading", inDirectory: "art.scnassets/Loading")
-//        self.addParticleSystem(loadingNode!)
+        let sphere = SCNSphere(radius: 0.010)
+        
+        let material = SCNMaterial()
+        material.emission.contents = [UIColor.white]
+        material.emission.intensity = 1.0
+        
+        sphere.firstMaterial = material
+        
+//        box.firstMaterial?.diffuse.contents = UIColor.blue
+        loadingNode = SCNNode(geometry: sphere)
+        
+        let trail = SCNParticleSystem(named: "fire.scnp", inDirectory: "art.scnassets/Loading")!
+        // 3
+        trail.particleColor = UIColor.white
+        // 4
+        trail.emitterShape = sphere
+        
+//        loadingNode?.addParticleSystem(trail)
+        
+        self.addChildNode(loadingNode!)
+        loadingNode?.simdWorldTransform = self.simdWorldTransform.translatedUp(-0.4)
+        
+        let moveUp = SCNAction.moveBy(x: 0, y: 0.4, z: 0, duration: 4)
+        moveUp.timingMode = .easeInEaseOut
+        
+        let scaleUp = SCNAction.scale(by: 1.5, duration: 1.0)
+        scaleUp.timingMode = .easeInEaseOut;
+        let scaleDown = SCNAction.scale(by: 1/1.5, duration: 1.0)
+        scaleDown.timingMode = .easeInEaseOut;
+        let scaleSequence = SCNAction.sequence([scaleUp,scaleDown])
+        let scaleLoop = SCNAction.repeatForever(scaleSequence)
+        
+        loadingNode!.runAction(scaleLoop)
+        loadingNode!.runAction(moveUp)
         
     }
     
     private func removeLoadingNode() {
         
-//        self.removeParticleSystem(loadingNode!)
+        loadingNode?.removeFromParentNode()
         
     }
     
@@ -93,7 +128,7 @@ class VirtualObject: SCNNode {
         
         DispatchQueue.global(qos: .background).async {
             
-            sleep(2)
+            sleep(5)
             
             self.loadAssetsFromFile()
             completionHandlerOnMain(nil)
@@ -131,67 +166,94 @@ class VirtualObject: SCNNode {
             child.geometry?.firstMaterial?.lightingModel = .physicallyBased
             child.movabilityHint = .movable
             
-            if let animationKey = child.animationKeys.first {
-                
-                animationNodes[animationKey] = child
-                virtualButtons.append(createVirtualButtonWithKey(animationKey))
-            }
-            
+            findAnimations(node: child)
             wrapperNode.addChildNode(child)
         }
         
+        let playPauseButton = VirtualButton(title: "Rotation")
+        playPauseButton.onAction = {
+            self.playAllAnimations()
+        }
+        playPauseButton.offAction = {
+            self.pauseAllAnimations()
+        }
 
+        virtualButtons.append(playPauseButton)
         
         delegate!.prepare(node: wrapperNode) {
-            self.addChildNode(wrapperNode)
             
             self.virtualButtonsContainer = VirtualButtonsContainer(buttons: virtualButtons)
             wrapperNode.addChildNode(self.virtualButtonsContainer!)
-            self.virtualButtonsContainer?.simdWorldTransform = self.simdWorldTransform.translatedUp(0.0).translatedforward(0.5)
+            self.virtualButtonsContainer?.simdWorldTransform = wrapperNode.simdWorldTransform.translatedUp(0.35).translatedforward(0.0)
+            
+            let scaleFactor: CGFloat = 0.1
+            wrapperNode.scale = SCNVector3(scaleFactor, scaleFactor, scaleFactor)
+//            wrapperNode.opacity = 0.0
+            self.addChildNode(wrapperNode)
+            
+            let scaleUp = SCNAction.scale(by: 1/scaleFactor, duration: 0.2)
+            scaleUp.timingMode = .easeIn;
+            
+            let fadeIn = SCNAction.fadeIn(duration: 0.1)
+            scaleUp.timingMode = .easeInEaseOut;
+            
+            wrapperNode.runAction(scaleUp)
+            wrapperNode.runAction(fadeIn)
+            self.virtualButtonsContainer?.runAction(fadeIn)
+            
+            
+            self.removeLoadingNode()
         }
         
     }
     
-    private func createVirtualButtonWithKey(_ key: String) -> VirtualButton {
+    private func findAnimations(node: SCNNode) {
         
-        let button = VirtualButton()
-        button.title = key
-        button.onAction = { [weak self] in
-            self?.playAnimation(named: key)
-        }
-        button.offAction = { [weak self] in
-            self?.pauseAnimation(named: key)
+        for animationKey in node.animationKeys {
+            animationNodes[animationKey] = node
         }
         
-        button.highlighted = true
-        return button
+        for childNode in node.childNodes {
+            findAnimations(node: childNode)
+        }
+
+    }
+    
+    private func playAllAnimations() {
+        
+        for key in animationNodes.keys {
+            playAnimation(named: key)
+        }
+        
+    }
+    
+    private func pauseAllAnimations() {
+        
+        for key in animationNodes.keys {
+            pauseAnimation(named: key)
+        }
+        
     }
     
     private func playAnimation(named animationName: String) {
         
         print("Animation: \(animationName)")
         
-        for child in self.childNodes.first!.childNodes {
-            if let animationPlayer = child.animationPlayer(forKey: animationName) {
-                
-                if animationPlayer.paused {
-                    animationPlayer.play()
-                } else {
-                    animationPlayer.speed = 0.2
-                }
+        if let node = animationNodes[animationName], let animationPlayer = node.animationPlayer(forKey: animationName) {
+            
+            if animationPlayer.paused {
+                animationPlayer.play()
+            } else {
+                animationPlayer.speed = 0.8
             }
         }
     }
     
     private func pauseAnimation(named animationName: String) {
         
-        print("Animation: \(animationName)")
-        
-        for child in self.childNodes.first!.childNodes {
-            if let animationPlayer = child.animationPlayer(forKey: animationName) {
-                
-                animationPlayer.speed = 0
-            }
+        if let node = animationNodes[animationName], let animationPlayer = node.animationPlayer(forKey: animationName) {
+            
+            animationPlayer.speed = 0.0
         }
     }
     
