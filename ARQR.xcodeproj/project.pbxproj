@@ -15,11 +15,13 @@
 		D18F78B21F84F7FF00C77189 /* Pods_ARQR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F778181017BC39824548F6D7 /* Pods_ARQR.framework */; };
 		D19A6A311F838B9D0009C8CE /* VirtualObjectsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19A6A301F838B9D0009C8CE /* VirtualObjectsManager.swift */; };
 		D19A6A331F83B6260009C8CE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19A6A321F83B6260009C8CE /* Extensions.swift */; };
-		D19A6A361F84CDE60009C8CE /* VirtualObjectInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19A6A351F84CDE60009C8CE /* VirtualObjectInfo.swift */; };
+		D19A6A361F84CDE60009C8CE /* VirtualObjectDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19A6A351F84CDE60009C8CE /* VirtualObjectDescription.swift */; };
 		D19A6A381F84D0760009C8CE /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19A6A371F84D0760009C8CE /* NetworkManager.swift */; };
 		D1B0AFDD1F862948008F063E /* VirtualObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B0AFDC1F862948008F063E /* VirtualObject.swift */; };
 		D1B0AFDF1F864DBD008F063E /* VirtualButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B0AFDE1F864DBD008F063E /* VirtualButton.swift */; };
 		D1B0AFE11F866853008F063E /* VirtualButtonsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B0AFE01F866853008F063E /* VirtualButtonsContainer.swift */; };
+		D1BF3A581F8F689900DA2552 /* VirtualObjectNodeInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BF3A571F8F689900DA2552 /* VirtualObjectNodeInformation.swift */; };
+		D1BF3A5A1F8F704100DA2552 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BF3A591F8F704100DA2552 /* InfoView.swift */; };
 		D1CBDCCA1F8E3392001AD067 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1B0B0061F87BD54008F063E /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -36,12 +38,14 @@
 		D18F78AA1F84F75700C77189 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D19A6A301F838B9D0009C8CE /* VirtualObjectsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObjectsManager.swift; sourceTree = "<group>"; };
 		D19A6A321F83B6260009C8CE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		D19A6A351F84CDE60009C8CE /* VirtualObjectInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObjectInfo.swift; sourceTree = "<group>"; };
+		D19A6A351F84CDE60009C8CE /* VirtualObjectDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObjectDescription.swift; sourceTree = "<group>"; };
 		D19A6A371F84D0760009C8CE /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		D1B0AFDC1F862948008F063E /* VirtualObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObject.swift; sourceTree = "<group>"; };
 		D1B0AFDE1F864DBD008F063E /* VirtualButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualButton.swift; sourceTree = "<group>"; };
 		D1B0AFE01F866853008F063E /* VirtualButtonsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualButtonsContainer.swift; sourceTree = "<group>"; };
 		D1B0B0061F87BD54008F063E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D1BF3A571F8F689900DA2552 /* VirtualObjectNodeInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObjectNodeInformation.swift; sourceTree = "<group>"; };
+		D1BF3A591F8F704100DA2552 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		F778181017BC39824548F6D7 /* Pods_ARQR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARQR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -96,6 +100,7 @@
 				D1B0B0051F87BC94008F063E /* AR Components */,
 				D19A6A341F84CDA50009C8CE /* Data */,
 				D1B0B0041F87BC5B008F063E /* Utils */,
+				D1BF3A591F8F704100DA2552 /* InfoView.swift */,
 			);
 			path = ARQR;
 			sourceTree = "<group>";
@@ -103,8 +108,9 @@
 		D19A6A341F84CDA50009C8CE /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				D19A6A351F84CDE60009C8CE /* VirtualObjectInfo.swift */,
+				D19A6A351F84CDE60009C8CE /* VirtualObjectDescription.swift */,
 				D19A6A371F84D0760009C8CE /* NetworkManager.swift */,
+				D1BF3A571F8F689900DA2552 /* VirtualObjectNodeInformation.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -269,10 +275,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D19A6A361F84CDE60009C8CE /* VirtualObjectInfo.swift in Sources */,
+				D19A6A361F84CDE60009C8CE /* VirtualObjectDescription.swift in Sources */,
 				D1B0AFE11F866853008F063E /* VirtualButtonsContainer.swift in Sources */,
 				D19A6A331F83B6260009C8CE /* Extensions.swift in Sources */,
 				D13BB43C1F8375530069016C /* QRScanner.swift in Sources */,
+				D1BF3A5A1F8F704100DA2552 /* InfoView.swift in Sources */,
+				D1BF3A581F8F689900DA2552 /* VirtualObjectNodeInformation.swift in Sources */,
 				D13BB42C1F836A820069016C /* ARQRViewController.swift in Sources */,
 				D1B0AFDF1F864DBD008F063E /* VirtualButton.swift in Sources */,
 				D1B0AFDD1F862948008F063E /* VirtualObject.swift in Sources */,

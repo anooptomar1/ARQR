@@ -109,17 +109,31 @@ extension ARQRViewController {
     func handleTap(gestureRecognize: UITapGestureRecognizer) {
         
         let position = gestureRecognize.location(ofTouch: 0, in: sceneView)
-        virtualButton(at: position)?.tapped()
+        
+        
+        
+        handleTap(at: position)
     }
     
-    private func virtualButton(at point: CGPoint) -> VirtualButton?  {
+    private func handleTap(at point: CGPoint) {
         
         let hitTestOptions: [SCNHitTestOption: Any] = [.boundingBoxOnly: true]
         let hitTestResults: [SCNHitTestResult] = sceneView.hitTest(point, options: hitTestOptions)
         
-        return hitTestResults.lazy.flatMap { result in
-            self.isNodePartOfVirtualbutton(result.node)
-            }.first
+        for result in hitTestResults {
+            
+            if let button = self.isNodePartOfVirtualbutton(result.node) {
+                button.tapped()
+                return
+            }
+            
+            if let virtualObject = self.isNodePartOfVirtualObject(result.node), let nodeInformation = virtualObject.informationForNode(result.node) {
+                
+                presentInformation(nodeInformation: nodeInformation)
+                
+            }
+            
+        }
     }
     
     func isNodePartOfVirtualbutton(_ node: SCNNode) -> VirtualButton? {
@@ -133,6 +147,27 @@ extension ARQRViewController {
         
         return nil
     }
+    
+    func isNodePartOfVirtualObject(_ node: SCNNode) -> VirtualObject? {
+        if let virtualObject = node as? VirtualObject {
+            return virtualObject
+        }
+        
+        if node.parent != nil {
+            return isNodePartOfVirtualObject(node.parent!)
+        }
+        
+        return nil
+    }
+}
+
+func presentInformation(nodeInformation: VirtualObjectNodeInformation) {
+    
+    
+    
+    
+    
+    
 }
 
 // MARK: - ARSCNViewDelegate

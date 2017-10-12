@@ -8,7 +8,7 @@
 
 import Foundation
 
-class VirtualObjectInfo: Codable {
+class VirtualObjectDescription: Codable {
     
     var id: String
 //    var title: String
@@ -16,4 +16,5 @@ class VirtualObjectInfo: Codable {
     
     var filePath: String?
     
+    var nodeInformation: [VirtualObjectNodeInformation]
 }

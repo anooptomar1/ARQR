@@ -14,6 +14,7 @@ class VirtualObject: SCNNode {
     
     var id: String
     var anchor: ARAnchor
+    var objectDescription: VirtualObjectDescription?
     
     var virtualButtonsContainer: VirtualButtonsContainer?
     var loadingNode: SCNNode?
@@ -128,21 +129,22 @@ class VirtualObject: SCNNode {
         
         DispatchQueue.global(qos: .background).async {
             
-            sleep(5)
+//            sleep(5)
             
-            self.loadAssetsFromFile()
-            completionHandlerOnMain(nil)
+//            self.loadAssetsFromFile()
+//            completionHandlerOnMain(nil)
             
-//            NetworkManager.shared.getObjectInfoWithId(self.id) { objectInfo, error in
-//                if let error = error { completionHandlerOnMain(error); return }
-//
-//                NetworkManager.shared.downloadFileForVirtualObject(objectInfo) { error in
-//                    if let error = error { completionHandlerOnMain(error); return }
-//
-//                    self.loadAssetsFromFile()
-//                    completionHandlerOnMain(nil)
-//                }
-//            }
+            NetworkManager.shared.getObjectInfoWithId(self.id) { objectDescription, error in
+                if let error = error { completionHandlerOnMain(error); return }
+                self.objectDescription = objectDescription
+
+                NetworkManager.shared.downloadFileForVirtualObject(objectDescription) { error in
+                    if let error = error { completionHandlerOnMain(error); return }
+
+                    self.loadAssetsFromFile()
+                    completionHandlerOnMain(nil)
+                }
+            }
             
         }
     }
@@ -278,6 +280,11 @@ class VirtualObject: SCNNode {
             
             setOpacityOnNodesWithName(name, to: value, onBaseNode: childNode)
         }
+    }
+    
+    func informationForNode(_ node: SCNNode) -> VirtualObjectNodeInformation? {
+    
+        return objectDescription?.nodeInformation.first {$0.Name == node.name}
     }
     
 }

@@ -23,13 +23,13 @@ class NetworkManager: NSObject {
     let baseURL = "https://y6yqghqt69.execute-api.eu-west-1.amazonaws.com/prototype/api/v1"
     let resourcePath = "/resource"
     
-    func getObjectInfoWithId(_ id: String, onCompletion: @escaping (VirtualObjectInfo, Error?) -> Void) {
+    func getObjectInfoWithId(_ id: String, onCompletion: @escaping (VirtualObjectDescription, Error?) -> Void) {
         let route = "\(baseURL)\(resourcePath)/\(id)"
         makeHTTPGetRequest(path: route, onCompletion: { data, error in
             
             do {
                 //Decode retrived data with JSONDecoder and assing type of Article object
-                let objectInfo = try JSONDecoder().decode(VirtualObjectInfo.self, from: data)
+                let objectInfo = try JSONDecoder().decode(VirtualObjectDescription.self, from: data)
                 onCompletion(objectInfo, error)
                 
             } catch let jsonError {
@@ -38,7 +38,7 @@ class NetworkManager: NSObject {
         })
     }
     
-    func downloadFileForVirtualObject(_ virtualObjectInfo: VirtualObjectInfo, onCompletion: @escaping (Error?) -> Void) {
+    func downloadFileForVirtualObject(_ virtualObjectInfo: VirtualObjectDescription, onCompletion: @escaping (Error?) -> Void) {
         
         let fileUrl = URL(string: virtualObjectInfo.path)!
         let destination = DownloadRequest.suggestedDownloadDestination(for: .documentDirectory)
