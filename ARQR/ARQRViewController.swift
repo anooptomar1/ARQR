@@ -16,6 +16,7 @@ class ARQRViewController: UIViewController {
     
     var sceneView: ARSCNView!
     var resetButton: UIButton!
+    var infoView: InfoView!
     
     var virtualObjectsManager: VirtualObjectsManager!
     
@@ -112,10 +113,10 @@ extension ARQRViewController {
         
         
         
-        handleTap(at: position)
+        reactOnTap(at: position)
     }
     
-    private func handleTap(at point: CGPoint) {
+    private func reactOnTap(at point: CGPoint) {
         
         let hitTestOptions: [SCNHitTestOption: Any] = [.boundingBoxOnly: true]
         let hitTestResults: [SCNHitTestResult] = sceneView.hitTest(point, options: hitTestOptions)
@@ -159,16 +160,32 @@ extension ARQRViewController {
         
         return nil
     }
+    
+    func presentInformation(nodeInformation: VirtualObjectNodeInformation) {
+        
+        
+        infoView = InfoView(information: nodeInformation)
+        infoView.alpha = 0
+        infoView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(infoView)
+        
+        NSLayoutConstraint.activate([
+            
+            infoView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            infoView.topAnchor.constraint(equalTo: view.topAnchor),
+            infoView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            infoView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            
+            ])
+        
+        UIView.animate(withDuration: 0.3) {
+            self.infoView.alpha = 1
+            self.infoView.effect = UIBlurEffect(style: .dark)
+        }
+        
+    }
 }
 
-func presentInformation(nodeInformation: VirtualObjectNodeInformation) {
-    
-    
-    
-    
-    
-    
-}
 
 // MARK: - ARSCNViewDelegate
 

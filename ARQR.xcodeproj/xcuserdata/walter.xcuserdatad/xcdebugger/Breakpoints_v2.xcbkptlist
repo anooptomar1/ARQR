@@ -10,13 +10,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ARQR/ARQRViewController.swift"
-            timestampString = "529489468.267032"
+            timestampString = "529840883.969719"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "193"
-            endingLineNumber = "193"
-            landmarkName = "ARQRViewController"
-            landmarkType = "21">
+            startingLineNumber = "210"
+            endingLineNumber = "210"
+            landmarkName = "session(_:didFailWithError:)"
+            landmarkType = "7">
             <Locations>
                <Location
                   shouldBeEnabled = "No"

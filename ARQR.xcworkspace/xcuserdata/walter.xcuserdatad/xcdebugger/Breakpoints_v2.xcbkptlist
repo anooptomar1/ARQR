@@ -105,11 +105,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ARQR/ARQRViewController.swift"
-            timestampString = "529489468.266416"
+            timestampString = "529840883.969106"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "221"
-            endingLineNumber = "221">
+            startingLineNumber = "238"
+            endingLineNumber = "238"
+            landmarkName = "session(_:didUpdate:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -151,12 +153,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ARQR/ARQRViewController.swift"
-            timestampString = "529489468.266533"
+            timestampString = "529840883.969273"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "217"
-            endingLineNumber = "217"
-            landmarkName = "anchorOnPlaneBehind(_:in:)"
+            startingLineNumber = "234"
+            endingLineNumber = "234"
+            landmarkName = "session(_:didUpdate:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -215,13 +217,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ARQR/AR Components/VirtualObject.swift"
-            timestampString = "529489468.266659"
+            timestampString = "529840883.969444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "115"
             endingLineNumber = "115"
-            landmarkName = "removeLoadingNode()"
-            landmarkType = "7">
+            landmarkName = "VirtualObject"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -231,13 +233,124 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ARQR/AR Components/VirtualObject.swift"
-            timestampString = "529489468.267089"
+            timestampString = "529840883.969546"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "62"
             endingLineNumber = "62"
             landmarkName = "load()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ARQR/AR Components/VirtualButton.swift"
+            timestampString = "529840883.969614"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "VirtualButton"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ARQR.VirtualButton.backgroundImageNode.getter : __ObjC.SKSpriteNode"
+                  moduleName = "ARQR"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/walter/Documents/Dev/ARQR/ARQR/AR%20Components/VirtualButton.swift"
+                  timestampString = "529490374.341864"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "104">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ARQR.VirtualButton.backgroundImageNode.setter : __ObjC.SKSpriteNode"
+                  moduleName = "ARQR"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/walter/Documents/Dev/ARQR/ARQR/AR%20Components/VirtualButton.swift"
+                  timestampString = "529490374.343719"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "120">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ARQR/AR Components/VirtualButton.swift"
+            timestampString = "529840883.969667"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
+            landmarkName = "VirtualButton"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ARQR.VirtualButton.__deallocating_deinit"
+                  moduleName = "ARQR"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/walter/Documents/Dev/ARQR/ARQR/AR%20Components/VirtualButton.swift"
+                  timestampString = "529490404.65009"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ARQR.VirtualButton.__allocating_init() -&gt; ARQR.VirtualButton"
+                  moduleName = "ARQR"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/walter/Documents/Dev/ARQR/ARQR/AR%20Components/VirtualButton.swift"
+                  timestampString = "529490404.651981"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ARQR.VirtualButton.init() -&gt; ARQR.VirtualButton"
+                  moduleName = "ARQR"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/walter/Documents/Dev/ARQR/ARQR/AR%20Components/VirtualButton.swift"
+                  timestampString = "529490404.653969"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "12">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -10,12 +10,15 @@ import Foundation
 
 class VirtualObjectNodeInformation: Codable {
     
-    var Name: String
+    var name: String
     var imgageUrl: String?
     
-    var Information: [String: String]
+    var information: [String: String]
     
-    
-    
+    init(name: String) {
+        self.name = name
+        information = [String: String]()
+    }
+
     
 }

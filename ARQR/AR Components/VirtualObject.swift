@@ -129,22 +129,30 @@ class VirtualObject: SCNNode {
         
         DispatchQueue.global(qos: .background).async {
             
-//            sleep(5)
+            self.objectDescription = VirtualObjectDescription(id: "1", path: "")
             
-//            self.loadAssetsFromFile()
-//            completionHandlerOnMain(nil)
+            let nodeInformation = VirtualObjectNodeInformation(name: "Earth")
+            nodeInformation.information["Age"] = "4.5 billion years"
+            nodeInformation.information["Population"] = "6 Billion"
             
-            NetworkManager.shared.getObjectInfoWithId(self.id) { objectDescription, error in
-                if let error = error { completionHandlerOnMain(error); return }
-                self.objectDescription = objectDescription
-
-                NetworkManager.shared.downloadFileForVirtualObject(objectDescription) { error in
-                    if let error = error { completionHandlerOnMain(error); return }
-
-                    self.loadAssetsFromFile()
-                    completionHandlerOnMain(nil)
-                }
-            }
+            self.objectDescription?.nodeInformation.append(nodeInformation)
+            
+            sleep(5)
+            
+            self.loadAssetsFromFile()
+            completionHandlerOnMain(nil)
+            
+//            NetworkManager.shared.getObjectInfoWithId(self.id) { objectDescription, error in
+//                if let error = error { completionHandlerOnMain(error); return }
+//                self.objectDescription = objectDescription
+//
+//                NetworkManager.shared.downloadFileForVirtualObject(objectDescription) { error in
+//                    if let error = error { completionHandlerOnMain(error); return }
+//
+//                    self.loadAssetsFromFile()
+//                    completionHandlerOnMain(nil)
+//                }
+//            }
             
         }
     }
@@ -284,7 +292,7 @@ class VirtualObject: SCNNode {
     
     func informationForNode(_ node: SCNNode) -> VirtualObjectNodeInformation? {
     
-        return objectDescription?.nodeInformation.first {$0.Name == node.name}
+        return objectDescription?.nodeInformation.first {$0.name == node.name}
     }
     
 }
