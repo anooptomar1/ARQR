@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import SDWebImage
 
 class InfoView: UIVisualEffectView {
-
+    
     var titleLabel: UILabel!
     var closeButton: UIButton!
     var imageView: UIImageView!
@@ -46,7 +47,9 @@ class InfoView: UIVisualEffectView {
         closeButton.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(closeButton)
         
-        imageView = UIImageView(image: #imageLiteral(resourceName: "earth"))
+//        imageView = UIImageView(image: #imageLiteral(resourceName: "earth"))
+        imageView = UIImageView()
+        imageView.sd_setImage(with: URL(string: "https://upload.wikimedia.org/wikipedia/commons/2/22/Earth_Western_Hemisphere_transparent_background.png"), placeholderImage:nil)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(imageView)
         
@@ -83,6 +86,7 @@ class InfoView: UIVisualEffectView {
         
         
         NSLayoutConstraint.activate([
+            
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 50),
             titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             

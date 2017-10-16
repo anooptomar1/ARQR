@@ -8,5 +8,6 @@ target 'ARQR' do
   # Pods for ARQR
   pod ‘Alamofire’ 
   pod 'Zip', '~> 1.0'
+  pod 'SDWebImage'
 
 end
