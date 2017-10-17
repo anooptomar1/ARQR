@@ -35,7 +35,7 @@ class VirtualObject: SCNNode {
         let enumerator = fileManager.enumerator(at: baseUrl, includingPropertiesForKeys: nil)
 
         while let element = enumerator?.nextObject() as? URL {
-            if (element.pathExtension == "scn" || element.pathExtension == "dae") {
+            if (element.pathExtension == "scn" || element.pathExtension == "abc") {
                 url = element
                 break
             }

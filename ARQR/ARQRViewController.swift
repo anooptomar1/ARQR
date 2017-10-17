@@ -145,13 +145,33 @@ extension ARQRViewController {
     
     private func virtualObjectOnScreen() -> VirtualObject? {
         
-        let centerPoint = CGPoint(x: sceneView.bounds.width/2,y: sceneView.bounds.height/2)
-        let hitTestResults = hitTestOnSceneView(at: centerPoint)
+        let center = CGPoint(x: sceneView.bounds.width/2,y: sceneView.bounds.height/2)
+        let top = CGPoint(x: sceneView.bounds.width/2,y: sceneView.bounds.height/4)
+        let topRight = CGPoint(x: 3*sceneView.bounds.width/4,y: sceneView.bounds.height/4)
+        let right = CGPoint(x: 3*sceneView.bounds.width/4,y: sceneView.bounds.height/2)
+        let bottomRight = CGPoint(x: 3*sceneView.bounds.width/4,y: 3*sceneView.bounds.height/4)
+        let bottom = CGPoint(x: sceneView.bounds.width/2,y: 3*sceneView.bounds.height/4)
+        let bottomLeft = CGPoint(x: sceneView.bounds.width/4,y: 3*sceneView.bounds.height/4)
+        let left = CGPoint(x: sceneView.bounds.width/4,y: sceneView.bounds.height/2)
+        let topLeft = CGPoint(x: sceneView.bounds.width/4,y: sceneView.bounds.height/4)
         
-        return hitTestResults.lazy.flatMap { result in
-            self.isNodePartOfVirtualObject(result.node)
+        let points = [center, top, right, bottom, left, topRight, bottomRight, bottomLeft, topLeft]
+        
+        for point in points {
+            
+            let hitTestResults = hitTestOnSceneView(at: point)
+            
+            let virtualObject = hitTestResults.lazy.flatMap { result in
+                self.isNodePartOfVirtualObject(result.node)
             }.first
+            
+            if let virtualObject = virtualObject {
+                return virtualObject
+            }
+            
+        }
         
+        return nil
     }
     
     private func hitTestOnSceneView(at point: CGPoint) -> [SCNHitTestResult] {
