@@ -11,7 +11,7 @@ import Foundation
 class VirtualObjectNodeInformation: Codable {
     
     var name: String
-    var imgageUrl: String?
+    var imageUrl: String?
     
     var info: [String: String]
     

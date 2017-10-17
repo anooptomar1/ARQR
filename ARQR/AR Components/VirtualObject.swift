@@ -23,10 +23,13 @@ class VirtualObject: SCNNode {
     
     weak var delegate: VirtualObjectDelegate?
     
+    lazy var baseUrl: URL = {
+        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(id)")
+    }()
+    
     lazy var fileUrl: URL? = {
         
         let fileManager = FileManager()
-        let baseUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(id)")
         var url: URL? = nil
 
         let enumerator = fileManager.enumerator(at: baseUrl, includingPropertiesForKeys: nil)
@@ -145,13 +148,25 @@ class VirtualObject: SCNNode {
             NetworkManager.shared.getObjectInfoWithId(self.id) { objectDescription, error in
                 if let error = error { completionHandlerOnMain(error); return }
                 self.objectDescription = objectDescription
-
-                NetworkManager.shared.downloadFileForVirtualObject(objectDescription) { error in
-                    if let error = error { completionHandlerOnMain(error); return }
-
+                
+                var isDir = ObjCBool(true)
+                if !FileManager.default.fileExists(atPath: self.baseUrl.path, isDirectory: &isDir) {
+                    
+                    NetworkManager.shared.downloadFileForVirtualObject(objectDescription) { error in
+                        if let error = error { completionHandlerOnMain(error); return }
+                        
+                        self.loadAssetsFromFile()
+                        completionHandlerOnMain(nil)
+                    }
+                } else {
+                    
+                    sleep(5)
+                    
                     self.loadAssetsFromFile()
                     completionHandlerOnMain(nil)
                 }
+                
+
             }
             
         }

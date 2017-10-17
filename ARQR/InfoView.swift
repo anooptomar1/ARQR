@@ -49,7 +49,7 @@ class InfoView: UIVisualEffectView {
         
 //        imageView = UIImageView(image: #imageLiteral(resourceName: "earth")
         imageView = UIImageView()
-        if let imageUrl = information.imgageUrl {
+        if let imageUrl = information.imageUrl {
             imageView.sd_setImage(with: URL(string: imageUrl), placeholderImage:nil)
         }
         imageView.translatesAutoresizingMaskIntoConstraints = false
