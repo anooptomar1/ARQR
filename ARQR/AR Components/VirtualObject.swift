@@ -25,22 +25,22 @@ class VirtualObject: SCNNode {
     
     lazy var fileUrl: URL? = {
         
-//        let fileManager = FileManager()
-//        let baseUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(id)")
-//        var url: URL? = nil
+        let fileManager = FileManager()
+        let baseUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(id)")
+        var url: URL? = nil
+
+        let enumerator = fileManager.enumerator(at: baseUrl, includingPropertiesForKeys: nil)
+
+        while let element = enumerator?.nextObject() as? URL {
+            if (element.pathExtension == "scn" || element.pathExtension == "dae") {
+                url = element
+                break
+            }
+        }
 //
-//        let enumerator = fileManager.enumerator(at: baseUrl, includingPropertiesForKeys: nil)
+//        let directory = id == "0001" ? "art.scnassets/SolarSystem" : "art.scnassets/Earth"
 //
-//        while let element = enumerator?.nextObject() as? URL {
-//            if (element.pathExtension == "scn" || element.pathExtension == "dae") {
-//                url = element
-//                break
-//            }
-//        }
-        
-        let directory = id == "0001" ? "art.scnassets/SolarSystem" : "art.scnassets/Earth"
-        
-        let url = Bundle.main.urls(forResourcesWithExtension: "dae", subdirectory: directory)?.first
+//        let url = Bundle.main.urls(forResourcesWithExtension: "dae", subdirectory: directory)?.first
         
         return url
     }()
@@ -129,30 +129,30 @@ class VirtualObject: SCNNode {
         
         DispatchQueue.global(qos: .background).async {
             
-            self.objectDescription = VirtualObjectDescription(id: "1", path: "")
-            
-            let nodeInformation = VirtualObjectNodeInformation(name: "Earth")
-            nodeInformation.information["Age"] = "4.5 billion years"
-            nodeInformation.information["Population"] = "6 Billion"
-            
-            self.objectDescription?.nodeInformation.append(nodeInformation)
-            
-            sleep(5)
-            
-            self.loadAssetsFromFile()
-            completionHandlerOnMain(nil)
-            
-//            NetworkManager.shared.getObjectInfoWithId(self.id) { objectDescription, error in
-//                if let error = error { completionHandlerOnMain(error); return }
-//                self.objectDescription = objectDescription
+//            self.objectDescription = VirtualObjectDescription(id: "1", path: "")
 //
-//                NetworkManager.shared.downloadFileForVirtualObject(objectDescription) { error in
-//                    if let error = error { completionHandlerOnMain(error); return }
+//            let nodeInformation = VirtualObjectNodeInformation(name: "Earth")
+//            nodeInformation.information["Age"] = "4.5 billion years"
+//            nodeInformation.information["Population"] = "6 Billion"
 //
-//                    self.loadAssetsFromFile()
-//                    completionHandlerOnMain(nil)
-//                }
-//            }
+//            self.objectDescription?.nodeInformation.append(nodeInformation)
+            
+//            sleep(5)
+            
+//            self.loadAssetsFromFile()
+//            completionHandlerOnMain(nil)
+            
+            NetworkManager.shared.getObjectInfoWithId(self.id) { objectDescription, error in
+                if let error = error { completionHandlerOnMain(error); return }
+                self.objectDescription = objectDescription
+
+                NetworkManager.shared.downloadFileForVirtualObject(objectDescription) { error in
+                    if let error = error { completionHandlerOnMain(error); return }
+
+                    self.loadAssetsFromFile()
+                    completionHandlerOnMain(nil)
+                }
+            }
             
         }
     }
@@ -292,7 +292,7 @@ class VirtualObject: SCNNode {
     
     func informationForNode(_ node: SCNNode) -> VirtualObjectNodeInformation? {
     
-        return objectDescription?.nodeInformation.first {$0.name == node.name}
+        return objectDescription?.info.first {$0.name == node.name}
     }
     
 }

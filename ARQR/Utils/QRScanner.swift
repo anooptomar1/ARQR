@@ -57,7 +57,7 @@ struct QRCode {
     var frame: CGRect
     
     var objectId: String {
-//        return "whale"
-        return payload
+        return payload == "0001" ? "be3f2d0d-4654-468c-aea0-6b30c5390078" : "e9cb53f4-731c-4bf5-9523-9f3f8c1591ff"
+//        return payload
     }
 }

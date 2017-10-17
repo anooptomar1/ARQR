@@ -13,11 +13,11 @@ class VirtualObjectNodeInformation: Codable {
     var name: String
     var imgageUrl: String?
     
-    var information: [String: String]
+    var info: [String: String]
     
     init(name: String) {
         self.name = name
-        information = [String: String]()
+        info = [String: String]()
     }
 
     

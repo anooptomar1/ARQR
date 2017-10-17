@@ -29,6 +29,7 @@ class NetworkManager: NSObject {
             
             do {
                 //Decode retrived data with JSONDecoder and assing type of Article object
+                print(String(data: data, encoding: .utf8))
                 let objectInfo = try JSONDecoder().decode(VirtualObjectDescription.self, from: data)
                 onCompletion(objectInfo, error)
                 
@@ -41,7 +42,15 @@ class NetworkManager: NSObject {
     func downloadFileForVirtualObject(_ virtualObjectInfo: VirtualObjectDescription, onCompletion: @escaping (Error?) -> Void) {
         
         let fileUrl = URL(string: virtualObjectInfo.path)!
-        let destination = DownloadRequest.suggestedDownloadDestination(for: .documentDirectory)
+        let fileName = fileUrl.lastPathComponent
+        let destination: DownloadRequest.DownloadFileDestination = { _, _ in
+            
+            let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            let fileURL = documentsURL.appendingPathComponent(fileName)
+            
+            return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
+        }
+        
         
         print("url: \(fileUrl.absoluteString)")
         

@@ -90,3 +90,33 @@ extension UIButton {
         return (largerFrame.contains(point)) ? self : nil
     }
 }
+
+extension SCNNode {
+    
+    func rotateObject(degreesHorizontal: CGFloat, degreesVertical: CGFloat) {
+        let rotateAction = SCNAction.rotateBy(x: 0, y: CGFloat(degreesHorizontal), z: CGFloat(degreesVertical), duration: 0.01)
+        self.runAction(rotateAction)
+    }
+    
+    func scaleObject(scale: CGFloat) -> Bool {
+        
+        guard scale > 0.5 && scale < 3 else { return false }
+        
+        let scaleAction = SCNAction.scale(to: scale, duration: 0.01)
+        self.runAction(scaleAction)
+        return true
+    }
+    
+}
+
+extension CGPoint {
+    
+    func distanceTo(point: CGPoint) -> CGFloat {
+        
+        let xDist = self.x - point.x
+        let yDist = self.y - point.y
+        return CGFloat(sqrt((xDist * xDist) + (yDist * yDist)))
+        
+    }
+    
+}

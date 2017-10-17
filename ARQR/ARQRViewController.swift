@@ -23,6 +23,12 @@ class ARQRViewController: UIViewController {
     var processing = false
     
     var floatingHeight: Float = 0.4
+    
+    var focusedVirtualObject: VirtualObject? = nil
+    
+    var activeTouches = [UITouch]()
+    var initialPinchDistance: CGFloat?
+    var initalPinchScale: CGFloat?
 }
 
 // MARK: - Lifecycle
@@ -40,6 +46,7 @@ extension ARQRViewController {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         sceneView.addGestureRecognizer(tapGesture)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -118,8 +125,7 @@ extension ARQRViewController {
     
     private func reactOnTap(at point: CGPoint) {
         
-        let hitTestOptions: [SCNHitTestOption: Any] = [.boundingBoxOnly: true]
-        let hitTestResults: [SCNHitTestResult] = sceneView.hitTest(point, options: hitTestOptions)
+        let hitTestResults = hitTestOnSceneView(at: point)
         
         for result in hitTestResults {
             
@@ -135,6 +141,26 @@ extension ARQRViewController {
             }
             
         }
+    }
+    
+    private func virtualObjectOnScreen() -> VirtualObject? {
+        
+        let centerPoint = CGPoint(x: sceneView.bounds.width/2,y: sceneView.bounds.height/2)
+        let hitTestResults = hitTestOnSceneView(at: centerPoint)
+        
+        return hitTestResults.lazy.flatMap { result in
+            self.isNodePartOfVirtualObject(result.node)
+            }.first
+        
+    }
+    
+    private func hitTestOnSceneView(at point: CGPoint) -> [SCNHitTestResult] {
+        
+        let hitTestOptions: [SCNHitTestOption: Any] = [.boundingBoxOnly: true]
+        let hitTestResults: [SCNHitTestResult] = sceneView.hitTest(point, options: hitTestOptions)
+        
+        return hitTestResults
+        
     }
     
     func isNodePartOfVirtualbutton(_ node: SCNNode) -> VirtualButton? {
@@ -183,6 +209,79 @@ extension ARQRViewController {
             self.infoView.effect = UIBlurEffect(style: .dark)
         }
         
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+       
+        print(touches.count)
+        
+        activeTouches.append(contentsOf: touches)
+        
+        if focusedVirtualObject == nil {
+            focusedVirtualObject = virtualObjectOnScreen()
+        }
+        
+        if activeTouches.count == 2 {
+            
+            initialPinchDistance = activeTouches[0].location(in: self.sceneView).distanceTo(point: activeTouches[1].location(in: self.sceneView))
+            initalPinchScale = CGFloat(focusedVirtualObject?.scale.x ?? 1.0)
+        }
+        
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        if activeTouches.count == 1 {
+            if let virtualObject = focusedVirtualObject, touches.count == 1, let touch = touches.first {
+                let locationInView = touch.location(in: self.sceneView)
+                let previousLocation = touch.previousLocation(in: self.sceneView)
+                
+                let translation = locationInView.x - previousLocation.x
+                let degreesHorizontal =  translation / CGFloat(200)
+                
+                virtualObject.rotateObject(degreesHorizontal: degreesHorizontal, degreesVertical: 0.0)
+            }
+            
+        } else if activeTouches.count == 2 {
+            
+            let distance = activeTouches[0].location(in: self.sceneView).distanceTo(point: activeTouches[1].location(in: self.sceneView))
+            let scale = distance/initialPinchDistance!
+            
+         let scaled = focusedVirtualObject?.scaleObject(scale: scale * initalPinchScale!)
+            
+            if let scaled = scaled, scaled == false {
+                initialPinchDistance = distance
+                initalPinchScale = CGFloat(focusedVirtualObject!.scale.x)
+            }
+            
+        }
+        
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        for touch in touches {
+            let index = activeTouches.index(of: touch)!
+            activeTouches.remove(at: index)
+        }
+        
+        if activeTouches.count == 0 {
+            focusedVirtualObject = nil
+        }
+    }
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        print("cancelled")
+        
+        for touch in touches {
+            let index = activeTouches.index(of: touch)!
+            activeTouches.remove(at: index)
+        }
+        
+        if activeTouches.count == 0 {
+            focusedVirtualObject = nil
+        }
     }
 }
 

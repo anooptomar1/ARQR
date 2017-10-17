@@ -16,11 +16,11 @@ class VirtualObjectDescription: Codable {
     
     var filePath: String?
     
-    var nodeInformation: [VirtualObjectNodeInformation]
+    var info: [VirtualObjectNodeInformation]
     
     init(id: String, path: String) {
         self.id = id
         self.path = path
-        self.nodeInformation = [VirtualObjectNodeInformation]()
+        self.info = [VirtualObjectNodeInformation]()
     }
 }

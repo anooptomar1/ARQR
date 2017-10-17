@@ -105,13 +105,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ARQR/ARQRViewController.swift"
-            timestampString = "529840883.969106"
+            timestampString = "529922374.552315"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "238"
-            endingLineNumber = "238"
-            landmarkName = "session(_:didUpdate:)"
-            landmarkType = "7">
+            startingLineNumber = "322"
+            endingLineNumber = "322"
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -153,12 +153,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ARQR/ARQRViewController.swift"
-            timestampString = "529840883.969273"
+            timestampString = "529922374.552439"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "234"
-            endingLineNumber = "234"
-            landmarkName = "session(_:didUpdate:)"
+            startingLineNumber = "318"
+            endingLineNumber = "318"
+            landmarkName = "sessionInterruptionEnded(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -217,7 +217,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ARQR/AR Components/VirtualObject.swift"
-            timestampString = "529840883.969444"
+            timestampString = "529930634.84335"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "115"
@@ -233,7 +233,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ARQR/AR Components/VirtualObject.swift"
-            timestampString = "529840883.969546"
+            timestampString = "529930634.843699"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "62"
@@ -351,6 +351,22 @@
                   offsetFromSymbolStart = "12">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ARQR/InfoView.swift"
+            timestampString = "529930634.843972"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "init(information:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

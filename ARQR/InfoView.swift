@@ -47,20 +47,22 @@ class InfoView: UIVisualEffectView {
         closeButton.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(closeButton)
         
-//        imageView = UIImageView(image: #imageLiteral(resourceName: "earth"))
+//        imageView = UIImageView(image: #imageLiteral(resourceName: "earth")
         imageView = UIImageView()
-        imageView.sd_setImage(with: URL(string: "https://upload.wikimedia.org/wikipedia/commons/2/22/Earth_Western_Hemisphere_transparent_background.png"), placeholderImage:nil)
+        if let imageUrl = information.imgageUrl {
+            imageView.sd_setImage(with: URL(string: imageUrl), placeholderImage:nil)
+        }
         imageView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(imageView)
         
         
         infoLabels = [UILabel]()
         
-        for key in information.information.keys {
+        for key in information.info.keys {
             
             let label = UILabel()
             label.textColor = UIColor.white
-            label.text = "\(key): \(information.information[key]!)"
+            label.text = "\(key): \(information.info[key]!)"
             label.translatesAutoresizingMaskIntoConstraints = false
             infoLabels.append(label)
         }
@@ -76,7 +78,7 @@ class InfoView: UIVisualEffectView {
         descriptionView.backgroundColor = UIColor.clear
         descriptionView.isEditable = false
         descriptionView.font = UIFont.systemFont(ofSize: 16)
-        descriptionView.text = "Earth is the third planet from the Sun and the only object in the Universe known to harbor life. According to radiometric dating and other sources of evidence, Earth formed over 4 billion years ago. Earth's gravity interacts with other objects in space, especially the Sun and the Moon, Earth's only natural satellite. Earth revolves around the Sun in 365.26 days, a period known as an Earth year. During this time, Earth rotates about its axis about 366.26 times."
+        descriptionView.text = information.info["description"] ?? "Information missing"
         descriptionView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(descriptionView)
         
