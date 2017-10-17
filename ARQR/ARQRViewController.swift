@@ -171,7 +171,7 @@ extension ARQRViewController {
             
         }
         
-        return nil
+        return nil
     }
     
     private func hitTestOnSceneView(at point: CGPoint) -> [SCNHitTestResult] {
